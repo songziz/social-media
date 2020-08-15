@@ -5,7 +5,21 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import MiniEvent from '../components/MiniEvent';
 
-export default function FeedScreen() {
+import { createStackNavigator } from '@react-navigation/stack';
+import EventScreen from "../screens/EventScreen";
+
+const Stack = createStackNavigator();
+
+function FeedStack() {
+    return (
+        <Stack.Navigator headerMode="none">
+            <Stack.Screen name="FeedScreen" component={Feed} />
+            <Stack.Screen name="EventScreen" component={EventScreen} />
+        </Stack.Navigator>
+    )
+}
+
+function Feed() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Feed</Text>
@@ -14,6 +28,12 @@ export default function FeedScreen() {
             <MiniEvent uid='sample' displayUser={true} />
         </View>
     );
+}
+
+export default function FeedScreen() {
+    return (
+        <FeedStack />
+    )
 }
 
 const styles = StyleSheet.create({
