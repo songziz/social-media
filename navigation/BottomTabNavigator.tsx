@@ -5,9 +5,12 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import FeedScreen from '../screens/FeedScreen';
+import FriendsScreen from '../screens/FriendsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+
+import { BottomTabParamList, FeedTabParamList, FriendsTabParamList, ProfileTabParamList, LandingTabParamList } from '../types';
+import LandingScreen from '../screens/LandingScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -16,18 +19,33 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="FeedTab"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="FeedTab"
+        component={FeedTabNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="FriendsTab"
+        component={FriendsTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="ProfileTab"
+        component={ProfileTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="LandingTab"
+        component={LandingTabNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
@@ -44,30 +62,58 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const FeedTabStack = createStackNavigator<FeedTabParamList>();
 
-function TabOneNavigator() {
+function FeedTabNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <FeedTabStack.Navigator>
+      <FeedTabStack.Screen
+        name="FeedTabScreen"
+        component={FeedScreen}
+        options={{ headerTitle: 'Feed' }}
       />
-    </TabOneStack.Navigator>
+    </FeedTabStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const FriendsTabStack = createStackNavigator<FriendsTabParamList>();
 
-function TabTwoNavigator() {
+function FriendsTabNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <FriendsTabStack.Navigator>
+      <FriendsTabStack.Screen
+        name="FriendsTabScreen"
+        component={FriendsScreen}
+        options={{ headerTitle: 'Friends' }}
       />
-    </TabTwoStack.Navigator>
+    </FriendsTabStack.Navigator>
+  );
+}
+
+const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
+
+function ProfileTabNavigator() {
+  return (
+    <ProfileTabStack.Navigator>
+      <ProfileTabStack.Screen
+        name="ProfileTabScreen"
+        component={ProfileScreen}
+        options={{ headerTitle: 'Profile' }}
+      />
+    </ProfileTabStack.Navigator>
+  );
+}
+
+const LandingTabStack = createStackNavigator<LandingTabParamList>();
+
+function LandingTabNavigator() {
+  return (
+    <LandingTabStack.Navigator>
+      <LandingTabStack.Screen
+        name="LandingTabScreen"
+        component={LandingScreen}
+        options={{ headerTitle: 'Landing' }}
+      />
+    </LandingTabStack.Navigator>
   );
 }
