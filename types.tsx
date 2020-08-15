@@ -23,5 +23,5 @@ export type ProfileTabParamList = {
 };
 
 export type LandingTabParamList = {
-  ProfileTabScreen: undefined;
+  LandingTabScreen: undefined;
 };
