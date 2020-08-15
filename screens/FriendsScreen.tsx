@@ -4,8 +4,21 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import MiniProfile from '../components/MiniProfile';
+import { createStackNavigator } from '@react-navigation/stack';
+import FriendInfoScreen from './FriendInfoScreen';
 
-export default function FriendsScreen() {
+const Stack = createStackNavigator();
+
+function FriendsStack() {
+    return (
+        <Stack.Navigator headerMode="none">
+            <Stack.Screen name="FriendsScreen" component={Friends} />
+            <Stack.Screen name="FriendInfoScreen" component={FriendInfoScreen} />
+        </Stack.Navigator>
+    )
+}
+
+function Friends() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Friends</Text>
@@ -15,6 +28,12 @@ export default function FriendsScreen() {
             <MiniProfile uid='sample' touchable={true} />
         </View>
     );
+}
+
+export default function FriendsScreen() {
+    return (
+        <FriendsStack />
+    )
 }
 
 const styles = StyleSheet.create({

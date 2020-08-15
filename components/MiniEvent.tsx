@@ -24,6 +24,7 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
   const onPress = () => {
     nav.navigate("EventScreen");
   }
+
   const OpeningsSlots = sampleEvent.slots.map((slot) => {
     return (
       <View style={styles.openingsSlot}>
@@ -51,7 +52,7 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
     );
   } else {
     return (
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={onPress}>
         <View style={styles.titleContainer}>
           <MonoText style={styles.title}>{sampleEvent.title}</MonoText>
         </View>
