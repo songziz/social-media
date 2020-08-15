@@ -71,8 +71,8 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
 const styles = StyleSheet.create({
   container: {
     width: '95%',
-    borderWidth: 1,
-    borderColor: 'white',
+    borderWidth: 2,
+    borderColor: 'green',
     display: 'flex',
     backgroundColor: 'white',
     borderRadius: 3,
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 2,
     flexWrap: 'wrap',
+    marginLeft: 8,
   },
   openingsText: {
     fontSize: 16,
@@ -112,12 +113,14 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 2,
-    width: '100%',
-    backgroundColor: 'blue',
+    width: '90%',
+    alignSelf: 'center',
+    backgroundColor: 'green',
   },
   title: {
     fontSize: 24,
     color: 'black',
+    alignSelf: 'center',
   },
   titleContainer: {
     backgroundColor: 'white',

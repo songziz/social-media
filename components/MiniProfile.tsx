@@ -25,7 +25,7 @@ export default function MiniProfile({ uid, touchable = true }: { uid: string, to
 
   if (touchable) {
     return (
-      <TouchableOpacity style={styles.container} onPress={onPress}>
+      <TouchableOpacity style={[styles.container, {borderColor: 'black'}]} onPress={onPress}>
         <View style={styles.emojiContainer}>
           <Text style={styles.emoji}>{sampleUser.emoji}</Text>
         </View>
@@ -51,7 +51,7 @@ export default function MiniProfile({ uid, touchable = true }: { uid: string, to
 const styles = StyleSheet.create({
   container: {
     width: '95%',
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: 'white',
     display: 'flex',
     flexDirection: 'row',
