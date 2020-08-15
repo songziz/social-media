@@ -25,9 +25,9 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
     nav.navigate("EventScreen");
   }
 
-  const OpeningsSlots = sampleEvent.slots.map((slot) => {
+  const OpeningsSlots = sampleEvent.slots.map((slot, index) => {
     return (
-      <View style={styles.openingsSlot}>
+      <View key={index} style={styles.openingsSlot}>
         <Text>{slot}</Text>
       </View>
     );
