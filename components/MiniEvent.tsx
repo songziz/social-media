@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { MonoText } from './StyledText';
-import { View } from './Themed';
+import { Text, View } from './Themed';
 import MiniProfile from './MiniProfile';
 
 import { useNavigation } from "@react-navigation/native";
@@ -18,12 +18,19 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
   const sampleEvent = {
     title: 'Fun event!',
     openings: 5,
-    slots: ['🔥', '🔥', '🔥', '', '']
+    slots: ['🔥', '🔥', '🔥', '', '',]
   };
 
   const onPress = () => {
     nav.navigate("EventScreen");
   }
+  const OpeningsSlots = sampleEvent.slots.map((slot) => {
+    return (
+      <View style={styles.openingsSlot}>
+        <Text>{slot}</Text>
+      </View>
+    );
+  });
 
   if (displayUser) {
     return (
@@ -35,10 +42,10 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
         </View>
         <View style={styles.separator} />
         <View style={styles.openingsContainer}>
-          <MonoText style={styles.openingsText}>openings: </MonoText>
-          {sampleEvent.slots.map(slot => {
-
-          })}
+          <MonoText style={styles.openingsText}>openings:</MonoText>
+          <View style={styles.openingsSlotContainer}>
+            {OpeningsSlots}
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -50,10 +57,10 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
         </View>
         <View style={styles.separator} />
         <View style={styles.openingsContainer}>
-          <MonoText style={styles.openingsText}>openings: </MonoText>
-          {sampleEvent.slots.map(slot => {
-
-          })}
+          <MonoText style={styles.openingsText}>openings:</MonoText>
+          <View style={styles.openingsSlotContainer}>
+            {OpeningsSlots}
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -73,10 +80,34 @@ const styles = StyleSheet.create({
   },
   openingsContainer: {
     backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 2,
+    flexWrap: 'wrap',
   },
   openingsText: {
     fontSize: 16,
     color: 'black',
+  },
+  openingsSlot: {
+    backgroundColor: 'white',
+    width: 30,
+    height: 30,
+    borderWidth: 1,
+    borderColor: 'red',
+    borderRadius: 20,
+    padding: 5,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 2,
+  },
+  openingsSlotContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    flexWrap: 'wrap',
   },
   separator: {
     height: 2,
