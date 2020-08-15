@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import MiniEvent from '../components/MiniEvent';
 
 export default function FeedScreen() {
     return (
@@ -10,6 +11,7 @@ export default function FeedScreen() {
             <Text style={styles.title}>Feed</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <EditScreenInfo path="/screens/FeedScreen.tsx" />
+            <MiniEvent uid='sample' displayUser={true} />
         </View>
     );
 }

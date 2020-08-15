@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import MiniProfile from '../components/MiniProfile';
 
 export default function FriendsScreen() {
     return (
@@ -10,6 +11,8 @@ export default function FriendsScreen() {
             <Text style={styles.title}>Friends</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <EditScreenInfo path="/screens/FriendsScreen.tsx" />
+            <MiniProfile uid='sample' touchable={true} />
+            <MiniProfile uid='sample' touchable={true} />
         </View>
     );
 }
