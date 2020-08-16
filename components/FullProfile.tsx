@@ -134,7 +134,7 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
       </View>
       <ScrollView contentContainerStyle={styles.scroll}>
         {eventsArray.map((uid) => (
-          <MiniEvent uid={uid} key={'profile-event' + uid} displayUser={false} currentUser={currentUser} navLink={'profile-event' + uid}/>
+          <MiniEvent uid={uid} key={'profile-event' + uid} displayUser={!currentUser} currentUser={currentUser} navLink={'profile-event' + uid}/>
         ))}
       </ScrollView>
     </View>
