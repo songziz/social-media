@@ -1,4 +1,4 @@
-import { firebase } from "../firebase";
+import { firebase, storage } from "../firebase";
 
 const USERS = 'https://us-central1-hack20-52610.cloudfunctions.net/widgets/users';
 /**
@@ -136,7 +136,7 @@ export const getRecents = async (uid: string) => {
 //  icon: string;
 //  uid: string;
 //}
-//  
+//
 export const getFriendRequests = async (uid: string) => {
   const token : string = await firebase.auth().currentUser!.getIdToken();
 
@@ -179,3 +179,17 @@ const fetchOptions = (method: string, idToken :string) => (
     },
   }
 );
+
+
+export const getImg = (url : string) => {
+  var gsReference = storage.refFromURL(url);
+  gsReference.getDownloadURL().then(function(url) {
+    // Insert url into an <img> tag to "download"
+    return url;
+  }).catch(function(error) {
+
+    // A full list of error codes is available at
+    // https://firebase.google.com/docs/storage/web/handle-errors
+    console.log(error);
+  });
+}
