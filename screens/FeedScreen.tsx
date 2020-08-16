@@ -14,6 +14,7 @@ function FeedStack() {
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="FeedScreen" component={Feed} />
+            <Stack.Screen name="FullEvent" component={FullEvent} />
         </Stack.Navigator>
     )
 }

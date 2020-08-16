@@ -5,7 +5,6 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import MiniProfile from '../components/MiniProfile';
 import { createStackNavigator } from '@react-navigation/stack';
-import FriendInfoScreen from './FriendInfoScreen';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
@@ -14,7 +13,6 @@ function FriendsStack() {
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="FriendsScreen" component={Friends} />
-            <Stack.Screen name="FriendInfoScreen" component={FriendInfoScreen} />
         </Stack.Navigator>
     )
 }

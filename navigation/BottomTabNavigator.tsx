@@ -82,7 +82,7 @@ function FriendsTabNavigator() {
   return (
     <FriendsTabStack.Navigator>
       <FriendsTabStack.Screen
-        name="FriendsTabScreen"
+        name="FriendsScreen"
         component={FriendsScreen}
         options={{ headerTitle: 'Friends' }}
       />

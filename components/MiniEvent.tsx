@@ -23,6 +23,7 @@ export default function MiniEvent({ uid, displayUser, currentUser }: { uid: stri
   };
 
   const onPress = () => {
+    nav.navigate('FullEvent');
     console.log('navigate to full event page');
   }
 
