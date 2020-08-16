@@ -19,7 +19,7 @@ export default function MiniEvent({ uid, displayUser, currentUser }: { uid: stri
   const sampleEvent = {
     title: 'Fun event!',
     openings: 5,
-    slots: ['🔥', '🔥', '🔥', '', '',]
+    slots: ['🔥', '🔥', '🔥', '', '']
   };
 
   const onPress = () => {
@@ -111,13 +111,14 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: 'green',
     display: 'flex',
-    backgroundColor: 'white',
+    backgroundColor: '#d9f3ff',
     borderRadius: 3,
     margin: 4,
     padding: 2,
+    alignItems: 'center',
   },
   openingsContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#d9f3ff',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
   openingsSlotContainer: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#d9f3ff',
     flexWrap: 'wrap',
   },
   separator: {
@@ -153,6 +154,7 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     backgroundColor: 'green',
+    marginTop: 2,
   },
   title: {
     fontSize: 24,
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   titleContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#d9f3ff',
     // borderWidth: 1,
     // borderColor: 'red',
   },

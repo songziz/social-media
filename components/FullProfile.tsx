@@ -11,6 +11,10 @@ export default function FullProfile({uid, currentUser=false}: {uid: string, curr
   const sendFriendRequest = () => {
     console.log('Friend request sent.');
   };
+
+  const logOut = () => {
+    console.log('Logged out.');
+  };
   
   return (
     <View style={styles.container}>
@@ -19,6 +23,11 @@ export default function FullProfile({uid, currentUser=false}: {uid: string, curr
         {!currentUser && 
           <TouchableOpacity style={styles.friendRequestContainer} onPress={sendFriendRequest}>
             <Text style={styles.friendRequestText}>send friend request</Text>
+          </TouchableOpacity>
+        }
+        {currentUser && 
+          <TouchableOpacity style={styles.friendRequestContainer} onPress={logOut}>
+            <Text style={styles.friendRequestText}>log out</Text>
           </TouchableOpacity>
         }
       </View>
@@ -44,6 +53,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderRadius: 5,
     backgroundColor: 'lightblue',
+    borderColor: 'white',
+    borderWidth: 2,
   },
   friendRequestText: {
     fontSize: 16,
