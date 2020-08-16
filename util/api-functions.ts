@@ -218,16 +218,17 @@ export const getEventInfo = async (eventId: string) => {
 
 // creates an event and returns the event info following the pattern
 // illustrated in the documentation above.
-export const createEvent = async (username: string, name: string, desc: string) => {
+export const createEvent = async (username: string, name: string, desc: string,
+  uid: string) => {
   const token : string = await firebase.auth().currentUser!.getIdToken();
 
   const options : any = fetchOptions('POST', token);
-  options.body = JSON.stringify({event: {username, name, description: desc}});
+  options.body = JSON.stringify({event: {username, name, description: desc, uid}});
 
-  const response = await fetch(`${EVENTS}`, options);
+  const response = await fetch(`${EVENTS}/`, options);
 
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new Error(await response.text());
   }
 
   return await response.json();
@@ -238,7 +239,7 @@ export const getIcons = async (icons : string[]) => {
   if (icons.length === 0) {
     return [];
   }
-  
+
   const token : string = await firebase.auth().currentUser!.getIdToken();
 
   const response = await fetch(
@@ -249,7 +250,7 @@ export const getIcons = async (icons : string[]) => {
   if (!response.ok) {
     throw new Error(response.statusText);
   }
-  
+
   return await response.json();
 }
 

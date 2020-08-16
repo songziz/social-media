@@ -23,15 +23,15 @@ function FriendsStack({uid} : {uid: string}) {
     return (
         <Stack.Navigator headerMode="none" initialRouteName="FriendsScreen">
             <Stack.Screen name="FriendsScreen">
-                {() => Friends({friendsArray: friendsArray})} 
+                {() => Friends({friendsArray: friendsArray})}
             </Stack.Screen>
             <Stack.Screen name="FriendRequestScreen">
                 {() => {
                     const confirmFriend = ({uid}: {uid: string}) => {
-                                                
+
                     }
                     const rejectFriend = ({uid}: {uid: string}) => {
-                                                
+
                     }
                     return(
 
@@ -56,7 +56,7 @@ function FriendsStack({uid} : {uid: string}) {
             </Stack.Screen>
             <Stack.Screen name="AddFriendScreen">
                 {() => {
-                    
+
                     const sendFriendRequest = () => {
                         console.log('friend request sent ' + inputtedUsername.toLowerCase());
                         leaveScreen();
@@ -68,7 +68,7 @@ function FriendsStack({uid} : {uid: string}) {
                     }
 
                     const nav = useNavigation();
-                
+
                     return (
                         <View style={styles.addFriendModalContainer}>
                             <MonoText style={styles.enterUsernameText}>enter username</MonoText>
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
         borderWidth: 1,
         borderColor: 'white',
-        borderRadius: 5, 
+        borderRadius: 5,
     },
     container: {
         flex: 1,
