@@ -5,6 +5,7 @@ import { StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Text, View } from './Themed';
 import { MonoText } from './StyledText';
 import MiniProfile from './MiniProfile';
+import { SampleEvents } from '../assets/SampleEvents';
 
 export default function EventScreen({ uid, createdUser, currentUser }: { uid: string, createdUser:string, currentUser: boolean }) {
     const [joined, setJoined] = useState<boolean>(false);
@@ -14,12 +15,19 @@ export default function EventScreen({ uid, createdUser, currentUser }: { uid: st
         console.log(joined);
     };
 
-    const sampleEvent = {
-        title: 'Super fun event!!!',
-        description: 'Come to my event for a really good time',
-        image: 'https://firebasestorage.googleapis.com/v0/b/hack20-52610.appspot.com/o/images%2Fpexels-andrea-piacquadio-864939.jpg?alt=media&token=494c23e4-9575-4692-8a65-9279557c33c6',
-    };
+    const slots=['👩🏻‍🍳', '🚴‍♂️', '🤓', '', '']
 
+    const userData = SampleEvents;
+    let sampleEvent;
+    if(uid=='sample1') {
+      sampleEvent = userData.sampleEvent1;
+    } else if (uid == 'sample2') {
+      sampleEvent = userData.sampleEvent2;
+    } else if (uid == 'sample3') {
+      sampleEvent = userData.sampleEvent3;
+    } else {
+      sampleEvent = userData.sampleEvent4;
+    }
     // const imgGetter = await getImg(sampleEvent.image).then((url) => {setImageState(url); console.log(url);}).catch(() => {setImageState(null)});
 
     return (
