@@ -117,7 +117,7 @@ const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
 
 function ProfileTabNavigator() {
 
-  const loggedInUID = 'sample';
+  const loggedInUID = auth.currentUser!.uid;
 
   return (
     <ProfileTabStack.Navigator>
