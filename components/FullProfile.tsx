@@ -14,19 +14,19 @@ function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUs
   //TODO: replace with actual array of events based off of uid.
   const eventsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
   return (
-      <Stack.Navigator headerMode="none">
-          <Stack.Screen name="FeedScreen">
-              {() => Profile({uid: uid, eventsArray: eventsArray, currentUser: currentUser, isFriends: isFriends})}
-          </Stack.Screen>
-          {eventsArray.map((uid) => (
-              <Stack.Screen
-                  key={'profile-event' + uid}
-                  name={'profile-event' + uid}
-              >
-                  {() => FullEvent({uid: uid, currentUser: false})}
-              </Stack.Screen>
-          ))}
-      </Stack.Navigator>
+    <Stack.Navigator>
+        <Stack.Screen name="FeedScreen">
+            {() => Profile({uid: uid, eventsArray: eventsArray, currentUser: currentUser, isFriends: isFriends})}
+        </Stack.Screen>
+        {eventsArray.map((uid) => (
+            <Stack.Screen
+                key={'profile-event' + uid}
+                name={'profile-event' + uid}
+            >
+                {() => FullEvent({uid: uid, currentUser: false})}
+            </Stack.Screen>
+        ))}
+    </Stack.Navigator>
   )
 };
 
@@ -67,7 +67,7 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
       </View>
       <ScrollView contentContainerStyle={styles.scroll}>
         {eventsArray.map((uid) => (
-          <MiniEvent uid={uid} key={'profile-event' + uid} displayUser={false} currentUser={false} navLink={'profile-event' + uid}/>
+          <MiniEvent uid={uid} key={'profile-event' + uid} displayUser={false} currentUser={currentUser} navLink={'profile-event' + uid}/>
         ))}
       </ScrollView>
     </View>

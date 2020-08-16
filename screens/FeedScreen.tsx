@@ -14,7 +14,7 @@ function FeedStack({ uid }: { uid: string }) {
     //TODO: replace with actual array of events based off of uid.
     const eventsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
     return (
-        <Stack.Navigator headerMode="none">
+        <Stack.Navigator>
             <Stack.Screen name="FeedScreen">
                 {() => Feed({ eventsArray: eventsArray })}
             </Stack.Screen>
