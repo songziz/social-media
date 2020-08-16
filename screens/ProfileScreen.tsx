@@ -5,7 +5,7 @@ import FullProfile from '../components/FullProfile';
 
 export default function ProfileScreen({uid}: {uid: string}) {
     return (
-        <FullProfile uid={uid} currentUser={true} isFriends={false}/>
+        <FullProfile uid={'user4'} currentUser={true} isFriends={false}/>
     );
 }
 

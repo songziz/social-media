@@ -26,7 +26,7 @@ export const SampleUsers = {
     },
     empty: {
         username: '',
-        icon: ' ',
+        icon: '💔',
         uid: '',
     },
 } 
