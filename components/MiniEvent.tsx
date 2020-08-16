@@ -6,6 +6,7 @@ import { Text, View } from './Themed';
 import MiniProfile from './MiniProfile';
 
 import { useNavigation } from "@react-navigation/native";
+import { SampleEvents } from '../assets/SampleEvents';
 
 /**
  * A MiniEvent.
@@ -16,11 +17,23 @@ import { useNavigation } from "@react-navigation/native";
 export default function MiniEvent({ uid, displayUser, currentUser, navLink }: { uid: string, displayUser: boolean, currentUser: boolean, navLink: string }) {
   const nav = useNavigation();
 
-  const sampleEvent = {
-    title: 'Fun event!',
-    openings: 5,
-    slots: ['🔥', '🔥', '🔥', '', '']
-  };
+  // const sampleEvent = {
+  //   title: 'Fun event!',
+  //   openings: 5,
+  //   slots: ['🔥', '🔥', '🔥', '', '']
+  // };
+
+  const userData = SampleEvents;
+  let sampleEvent;
+  if(uid=='sample1') {
+    sampleEvent = userData.sampleEvent1;
+  } else if (uid == 'sample2') {
+    sampleEvent = userData.sampleEvent2;
+  } else if (uid == 'sample3') {
+    sampleEvent = userData.sampleEvent3;
+  } else {
+    sampleEvent = userData.sampleEvent4;
+  }
 
   const onPress = () => {
     nav.navigate(navLink);
