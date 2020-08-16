@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, Text, Button } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, Text, Button, TouchableOpacity } from 'react-native';
 
 import { View } from '../components/Themed';
 import { TextInput } from 'react-native-gesture-handler';
@@ -100,13 +100,15 @@ function LoginScreen() {
                             rules={{ required: true }}
                             defaultValue=""
                         />
-                        <Button onPress={onSubmit} title={"Log in with email"} />
+                        <TouchableOpacity style={styles.button} onPress={onSubmit}>
+                            <Text style={styles.buttonText}>Log in with email</Text>
+                        </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
                 <View style={styles.registerContainer}>
-                    <Text>Don't have an account?</Text>
+                    <Text style={styles.registerContainerText}>Don't have an account?</Text>
                     <Button
-                        onPress={() => navigation.navigate("Register")} title={"Register here"}
+                        onPress={() => navigation.navigate("Register")} title={"Register here"} color={"white"}
                     />
                 </View>
             </View>
@@ -129,7 +131,14 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        marginTop: 4,
+        alignItems: "center",
+        backgroundColor: "white",
+        padding: 10,
+    },
+
+    buttonText: {
+        color: "black",
+        fontSize: 18,
     },
 
     errorText: {
@@ -151,10 +160,11 @@ const styles = StyleSheet.create({
     inputField: {
         borderWidth: 1,
         marginBottom: 6,
-        height: 36,
+        height: 45,
         borderRadius: 10,
         paddingLeft: 10,
         fontSize: 15,
+        borderColor: "white",
     },
 
     loginContainer: {
@@ -167,6 +177,10 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
         alignItems: "center",
         paddingBottom: '10%',
+    },
+
+    registerContainerText: {
+        color: "white",
     },
 
     screen: {

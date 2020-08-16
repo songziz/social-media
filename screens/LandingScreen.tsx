@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation, NavigationContainer } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 
@@ -26,13 +26,16 @@ function Landing() {
 
     return (
         <Screen>
-            <View>
-                <View>
-                    <Button
-                        onPress={() => nav.navigate("Login")} title="Login">
-                    </Button>
-                    <Button onPress={() => nav.navigate("Register")} title="Register">
-                    </Button>
+            <View style={styles.container}>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={() => nav.navigate("Login")}>
+                        <Text style={styles.buttonText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={() => nav.navigate("Register")}>
+                        <Text style={styles.buttonText}>Register</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Screen>
@@ -44,3 +47,25 @@ export default function LandingScreen() {
         <LandingStack />
     );
 }
+
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "white",
+        alignItems: "center",
+        padding: 15,
+        width: "100%",
+    },
+    buttonContainer: {
+        width: "100%",
+        padding: 15,
+    },
+    buttonText: {
+        color: "black",
+        fontSize: 20,
+    },
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    }
+})

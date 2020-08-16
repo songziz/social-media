@@ -7,7 +7,7 @@ import { MonoText } from './StyledText';
 import MiniProfile from './MiniProfile';
 
 export default function EventScreen({ uid, currentUser }: { uid: string, currentUser: boolean }) {
-    const [joined, setJoined] = useState<boolean>();
+    const [joined, setJoined] = useState<boolean>(false);
 
     const onPress = () => {
         setJoined(!joined);

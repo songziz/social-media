@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 
 import { Feather } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 type FormData = {
@@ -137,25 +138,22 @@ function RegisterScreen() {
                             defaultValue=""
                         />
 
-                        <Button
-                            onPress={() => {
-                                onSubmit();
-                            }}
-                            title={"Register"}
-                        >
-                        </Button>
+                        <TouchableOpacity style={styles.button} onPress={onSubmit}>
+                            <Text style={styles.buttonText}>Register an account</Text>
+                        </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
                 <View style={styles.loginContainer}>
-                    <Text>Already have an account?</Text>
+                    <Text style={styles.loginContainerText}>Already have an account?</Text>
                     <Button
                         onPress={() => navigation.navigate("Login")}
                         title="Log in here"
+                        color="white"
                     >
                     </Button>
                 </View>
             </View>
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback >
     );
 }
 
@@ -173,7 +171,14 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        marginTop: 4,
+        alignItems: "center",
+        backgroundColor: "white",
+        padding: 10,
+    },
+
+    buttonText: {
+        color: "black",
+        fontSize: 18,
     },
 
     errorText: {
@@ -185,21 +190,27 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 8,
+        color: "white",
     },
 
     inputField: {
         borderWidth: 1,
         marginBottom: 6,
-        height: 36,
+        height: 45,
         borderRadius: 10,
         paddingLeft: 10,
         fontSize: 15,
+        borderColor: "white",
     },
 
     loginContainer: {
         justifyContent: "flex-end",
         alignItems: "center",
         paddingBottom: '10%',
+    },
+
+    loginContainerText: {
+        color: "white",
     },
 
     passwordContainer: {
