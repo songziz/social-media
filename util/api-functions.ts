@@ -40,6 +40,7 @@ export const createUser = async (uid: string, username: string, icon: string) =>
   return await response.json();
 }
 
+// updates the preference tags for a user
 export const updateTags = async (uid: string, tags: any) => {
   const token : string = await firebase.auth().currentUser!.getIdToken();
 
@@ -53,6 +54,7 @@ export const updateTags = async (uid: string, tags: any) => {
   }
 }
 
+// sends a friend request from 'uid' to 'toUid'
 export const sendFriendReq = async (uid: string, toUid: string) => {
   const token : string = await firebase.auth().currentUser!.getIdToken();
 
@@ -65,6 +67,7 @@ export const sendFriendReq = async (uid: string, toUid: string) => {
   }
 }
 
+// accepts the friend request from 'fromUid' to 'uid'
 export const acceptFriendReq = async (uid: string, fromUid: string) => {
   const token : string = await firebase.auth().currentUser!.getIdToken();
 
@@ -77,6 +80,7 @@ export const acceptFriendReq = async (uid: string, fromUid: string) => {
   }
 }
 
+// adds the user to the event and updates necessary dependencies
 export const joinEvent = async (uid: string, eventId: string) => {
   const token : string = await firebase.auth().currentUser!.getIdToken();
 
@@ -89,6 +93,7 @@ export const joinEvent = async (uid: string, eventId: string) => {
   }
 }
 
+// removes the user from the event and updates necessary dependencies
 export const leaveEvent = async (uid: string, eventId: string) => {
   const token : string = await firebase.auth().currentUser!.getIdToken();
 
