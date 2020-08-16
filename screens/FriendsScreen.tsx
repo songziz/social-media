@@ -22,7 +22,7 @@ function FriendsStack({uid} : {uid: string}) {
                     key={'friends' + uid}
                     name={'friends' + uid}
                 >
-                    {() => FullProfile({uid: uid, currentUser: false})}
+                    {() => FullProfile({uid: uid, currentUser: false, isFriends: true})}
                 </Stack.Screen>
             ))}
         </Stack.Navigator>

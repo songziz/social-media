@@ -20,8 +20,8 @@ function FeedStack({uid}: {uid: string}) {
             </Stack.Screen>
             {eventsArray.map((uid) => (
                 <Stack.Screen
-                    key={'friends' + uid}
-                    name={'friends' + uid}
+                    key={'event' + uid}
+                    name={'event' + uid}
                 >
                     {() => FullEvent({uid: uid, currentUser: false})}
                 </Stack.Screen>
@@ -35,7 +35,7 @@ function Feed({eventsArray} : {eventsArray: string[]}) {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
                 {eventsArray.map((uid) => (
-                    <MiniEvent uid={uid} key={'friends' + uid} displayUser={true} currentUser={false} navLink={'friends' + uid}/>
+                    <MiniEvent uid={uid} key={'event' + uid} displayUser={true} currentUser={false} navLink={'event' + uid}/>
                 ))}
             </ScrollView>
         </View>
