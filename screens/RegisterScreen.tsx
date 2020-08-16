@@ -34,19 +34,19 @@ function RegisterScreen() {
     >();
 
     const onSubmit = handleSubmit(async ({ email, password }) => {
-        // const shouldGo = await auth.createUserWithEmailAndPassword(email, password)
-        //     .then(async (newUser: firebase.auth.UserCredential) => {
-        //         const uid = newUser.user!.uid;
-        //         const user = await newCustomer({ email, uid });
-        //         setUser(user);
-        //         navigation.navigate('Feed');
-        //         reset({ firstName: '', lastName: '', email: '', password: '' });
-        //     }).catch((error: { message: any; }) => {
-        //         setError('email', {
-        //             type: 'manual',
-        //             message: error.message,
-        //         });
-        //     });
+        const shouldGo = await auth.createUserWithEmailAndPassword(email, password)
+            .then(async (newUser: firebase.auth.UserCredential) => {
+                const uid = newUser.user!.uid;
+                //const user = await newCustomer({ email, uid });
+                //setUser(user);
+                navigation.navigate('Feed');
+                reset({ email: '', password: '' });
+            }).catch((error: { message: any; }) => {
+                setError('email', {
+                    type: 'manual',
+                    message: error.message,
+                });
+            });
     });
 
     const eyeOff = <Feather name="eye-off" size={24} />;

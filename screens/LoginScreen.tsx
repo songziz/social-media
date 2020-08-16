@@ -20,17 +20,17 @@ function LoginScreen() {
     const navigation = useNavigation();
 
     const onSubmit = handleSubmit(async ({ email, password }) => {
-        // await auth.signInWithEmailAndPassword(email, password)
-        //     .then(() => {
-        //         reset({ email: '', password: '' });
-        //         navigation.navigate("Feed");
-        //     })
-        //     .catch((error: { message: any; }) => {
-        //         setError('email', {
-        //             type: 'firebase',
-        //             message: error.message,
-        //         });
-        //     });
+        await auth.signInWithEmailAndPassword(email, password)
+            .then(() => {
+                reset({ email: '', password: '' });
+                navigation.navigate("Feed");
+            })
+            .catch((error: { message: any; }) => {
+                setError('email', {
+                    type: 'firebase',
+                    message: error.message,
+                });
+            });
     });
 
     return (
