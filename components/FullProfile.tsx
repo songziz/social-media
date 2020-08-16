@@ -17,7 +17,7 @@ const Stack = createStackNavigator();
 
 function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUser:boolean, isFriends: boolean}) {
   //TODO: replace with actual array of events based off of uid.
-  const eventsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
+  const eventsArray = ['sample1', 'sample2', 'sample3', 'sample4'];
   const [inputtedTitle, setInputtedTitle] = useState<string>('');
   const [inputtedDescription, setInputtedDescription] = useState<string>('');
   const [inputtedOpenings, setInputtedOpenings] = useState<string>('');

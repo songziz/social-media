@@ -23,6 +23,8 @@ export default function MiniEvent({ uid, displayUser, currentUser, navLink }: { 
   //   slots: ['🔥', '🔥', '🔥', '', '']
   // };
 
+  const slots=['👩🏻‍🍳', '🚴‍♂️', '🤓', '', '']
+
   const userData = SampleEvents;
   let sampleEvent;
   if(uid=='sample1') {
@@ -39,7 +41,7 @@ export default function MiniEvent({ uid, displayUser, currentUser, navLink }: { 
     nav.navigate(navLink);
   }
 
-  const OpeningsSlots = sampleEvent.slots.map((slot, index) => {
+  const OpeningsSlots = slots.map((slot, index) => {
     return (
       <View key={index} style={styles.openingsSlot}>
         <Text>{slot}</Text>
