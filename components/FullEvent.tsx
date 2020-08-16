@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
         height: "10%",
         width: "100%",
         padding: 10,
+        alignItems: "center",
     },
     buttonText: {
         color: "black",
     },
     container: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'flex-start',
     },
     descriptionText: {
