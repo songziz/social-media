@@ -35,11 +35,7 @@ function Feed({ eventsArray }: { eventsArray: string[] }) {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
                 {eventsArray.map((uid) => (
-<<<<<<< HEAD
                     <MiniEvent uid={uid} key={'event' + uid} displayUser={true} currentUser={false} navLink={'event' + uid}/>
-=======
-                    <MiniEvent uid={uid} key={'friends' + uid} displayUser={true} currentUser={false} navLink={'friends' + uid} />
->>>>>>> 13994e3b5786501fb97f8c049749a6c31c3b9283
                 ))}
             </ScrollView>
         </View>
