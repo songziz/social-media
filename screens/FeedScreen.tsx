@@ -6,7 +6,7 @@ import MiniEvent from '../components/MiniEvent';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import EventScreen from "../screens/EventScreen";
+import FullEvent from "../components/FullEvent"
 
 const Stack = createStackNavigator();
 
@@ -14,7 +14,7 @@ function FeedStack() {
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="FeedScreen" component={Feed} />
-            <Stack.Screen name="EventScreen" component={EventScreen} />
+            <Stack.Screen name="EventScreen" component={FullEvent} />
         </Stack.Navigator>
     )
 }
