@@ -1,6 +1,9 @@
 import { firebase } from "../firebase";
 
-const USERS = 'https://us-central1-hack20-52610.cloudfunctions.net/widgets/users';
+const ROOT_URL = 'https://us-central1-hack20-52610.cloudfunctions.net/widgets'
+const USERS = `${ROOT_URL}/users`;
+const EVENTS = `${ROOT_URL}/events`;
+
 /**
  * get the preliminary user info: {
  *  username: string,
@@ -168,6 +171,66 @@ export const getFriends = async (uid: string) => {
   if (!response.ok) {
     throw new Error(response.statusText);
   }
+}
+
+/**
+ * returns an array of a user's created events
+ */
+export const getProfileEvents = async (uid: string) => {
+  const token : string = await firebase.auth().currentUser!.getIdToken();
+
+  const options : any = fetchOptions('GET', token);
+
+  const response = await fetch(`${USERS}/${uid}/events`, options);
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return await response.json();
+}
+
+// gets all of the event info for a specific event (for profile page)
+// object looks like: {
+//    createdBy: (uid of creator) string;
+//    description: string;
+//    image: string (url);
+//    name: string;
+//    postedOn: string (date string);
+//    slots: string[] (uids)
+//    tags:
+//    username: string (of creator)
+//    uid: string;
+//  }
+export const getEventInfo = async (eventId: string) => {
+  const token : string = await firebase.auth().currentUser!.getIdToken();
+
+  const options : any = fetchOptions('GET', token);
+
+  const response = await fetch(`${EVENTS}/${eventId}`, options);
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return await response.json();
+}
+
+// creates an event and returns the event info following the pattern
+// illustrated in the documentation above.
+export const createEvent = async (username: string, name: string, desc: string) => {
+  const token : string = await firebase.auth().currentUser!.getIdToken();
+
+  const options : any = fetchOptions('POST', token);
+  options.body = JSON.stringify({event: {username, name, description: desc}});
+
+  const response = await fetch(`${EVENTS}`, options);
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return await response.json();
 }
 
 const fetchOptions = (method: string, idToken :string) => (
