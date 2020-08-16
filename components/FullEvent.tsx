@@ -6,17 +6,18 @@ import { Text, View } from './Themed';
 import { MonoText } from './StyledText';
 import MiniProfile from './MiniProfile';
 
-export default function EventScreen() {
-    const [joined, setJoined] = useState<boolean>(false);
+export default function EventScreen({ uid, currentUser }: { uid: string, currentUser: boolean }) {
+    const [joined, setJoined] = useState<boolean>();
 
     const onPress = () => {
         setJoined(!joined);
+        console.log(joined);
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.stickyProfile}>
-                <MiniProfile uid={""} touchable={false} />
+                <MiniProfile uid={uid} touchable={false} navLink={""} />
             </View>
             <ScrollView contentContainerStyle={styles.scroll}>
                 <MonoText style={styles.title}>Event Title</MonoText>
@@ -29,10 +30,11 @@ export default function EventScreen() {
                     <TouchableOpacity style={styles.button} onPress={onPress}>
                         <MonoText style={styles.buttonText}>Join Event!</MonoText>
                     </TouchableOpacity>}
+
                 <MonoText style={styles.openingsText}>Openings:</MonoText>
-                <MiniProfile uid='sample' touchable={false} />
-                <MiniProfile uid='sample' touchable={false} />
-                <MiniProfile uid='sample' touchable={false} />
+                <MiniProfile uid='sample' touchable={false} navLink={""} />
+                <MiniProfile uid='sample' touchable={false} navLink={""} />
+                <MiniProfile uid='sample' touchable={false} navLink={""} />
             </ScrollView>
         </View>
     );

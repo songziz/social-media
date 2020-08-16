@@ -6,8 +6,8 @@ import MiniEvent from '../components/MiniEvent';
 import MiniProfile from '../components/MiniProfile';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function FullProfile({uid, currentUser=false}: {uid: string, currentUser:boolean}) {
-  
+export default function FullProfile({ uid, currentUser = false }: { uid: string, currentUser: boolean }) {
+
   const sendFriendRequest = () => {
     console.log('Friend request sent.');
   };
@@ -15,29 +15,29 @@ export default function FullProfile({uid, currentUser=false}: {uid: string, curr
   const logOut = () => {
     console.log('Logged out.');
   };
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.stickyProfile}>
-        <MiniProfile uid={uid} touchable={false} />
-        {!currentUser && 
+        <MiniProfile uid={uid} touchable={false} navLink="" />
+        {!currentUser &&
           <TouchableOpacity style={styles.friendRequestContainer} onPress={sendFriendRequest}>
             <Text style={styles.friendRequestText}>send friend request</Text>
           </TouchableOpacity>
         }
-        {currentUser && 
+        {currentUser &&
           <TouchableOpacity style={styles.friendRequestContainer} onPress={logOut}>
             <Text style={styles.friendRequestText}>log out</Text>
           </TouchableOpacity>
         }
       </View>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser}/>
-        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser}/>
-        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser}/>
-        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser}/>
-        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser}/>
-        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser}/>
+        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser} navLink="" />
+        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser} navLink="" />
+        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser} navLink="" />
+        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser} navLink="" />
+        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser} navLink="" />
+        <MiniEvent uid='sample' displayUser={false} currentUser={currentUser} navLink="" />
       </ScrollView>
     </View>
   );
