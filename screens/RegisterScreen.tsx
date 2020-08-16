@@ -18,11 +18,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 type FormData = {
-    firstName: string;
-    lastName: string;
     email: string;
     password: string;
-    phoneNumber: string;
+    username: string;
+    emoji: string;
 };
 
 
@@ -138,20 +137,81 @@ function RegisterScreen() {
                             defaultValue=""
                         />
 
+                        <View style={styles.subheaderContainer}>
+                            <Text style={styles.subheader}>Username</Text>
+                            <View>
+                                {errors.username?.type === "required" && (
+                                    <Text style={styles.errorText}>This field is required.</Text>
+                                )}
+                                {errors.username?.type === "pattern" && (
+                                    <Text style={styles.errorText}>
+                                        Invalid username.
+                                    </Text>
+                                )}
+                                {errors.username?.type === "manual" && (
+                                    <Text style={styles.errorText}>Username already in use.</Text>
+                                )}
+                            </View>
+                        </View>
+                        <Controller
+                            control={control}
+                            render={({ onChange, onBlur, value }) => (
+                                <TextInput
+                                    style={styles.inputField}
+                                    onBlur={onBlur}
+                                    onChangeText={(value) => onChange(value)}
+                                    value={value}
+                                    placeholder="Username"
+                                    returnKeyType='done'
+                                />
+                            )}
+                            name="username"
+                            rules={{
+                                required: true,
+                                pattern: /^([a-zA-Z0-9_\-\.]+)$/,
+                            }}
+                            defaultValue=""
+                        />
+
+                        <View style={styles.subheaderContainer}>
+                            <Text style={styles.subheader}>Emoji</Text>
+                            <View>
+                                {errors.emoji?.type === "required" && (
+                                    <Text style={styles.errorText}>This field is required.</Text>
+                                )}
+                                {errors.emoji?.type === "pattern" && (
+                                    <Text style={styles.errorText}>
+                                        Invalid emoji.
+                                    </Text>
+                                )}
+                            </View>
+                        </View>
+                        <Controller
+                            control={control}
+                            render={({ onChange, onBlur, value }) => (
+                                <TextInput
+                                    style={styles.inputField}
+                                    onBlur={onBlur}
+                                    onChangeText={(value) => onChange(value)}
+                                    value={value}
+                                    placeholder="Emoji"
+                                    returnKeyType='done'
+                                    maxLength={2}
+                                />
+                            )}
+                            name="emoji"
+                            rules={{
+                                required: true,
+                                pattern: /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g,
+                            }}
+                            defaultValue=""
+                        />
+
                         <TouchableOpacity style={styles.button} onPress={onSubmit}>
                             <Text style={styles.buttonText}>Register an account</Text>
                         </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
-                <View style={styles.loginContainer}>
-                    <Text style={styles.loginContainerText}>Already have an account?</Text>
-                    <Button
-                        onPress={() => navigation.navigate("Login")}
-                        title="Log in here"
-                        color="white"
-                    >
-                    </Button>
-                </View>
             </View>
         </TouchableWithoutFeedback >
     );
@@ -168,16 +228,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: "center",
+        backgroundColor: 'white',
     },
 
     button: {
         alignItems: "center",
-        backgroundColor: "white",
+        backgroundColor: "darkgreen",
         padding: 10,
+        marginTop: 10,
     },
 
     buttonText: {
-        color: "black",
+        color: "white",
         fontSize: 18,
     },
 
@@ -190,7 +252,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: "white",
+        color: "black",
     },
 
     inputField: {
@@ -201,16 +263,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         fontSize: 15,
         borderColor: "white",
-    },
-
-    loginContainer: {
-        justifyContent: "flex-end",
-        alignItems: "center",
-        paddingBottom: '10%',
-    },
-
-    loginContainerText: {
-        color: "white",
+        backgroundColor: 'white',
     },
 
     passwordContainer: {
@@ -228,6 +281,7 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '94%',
         borderRadius: 8,
+        backgroundColor: 'lightblue',
     },
 
     screen: {

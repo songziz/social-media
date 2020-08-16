@@ -50,7 +50,7 @@ export default function LandingScreen() {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "white",
+        backgroundColor: "lightblue",
         alignItems: "center",
         padding: 15,
         width: "100%",
@@ -67,5 +67,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: 'white',
     }
 })

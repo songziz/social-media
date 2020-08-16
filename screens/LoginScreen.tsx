@@ -34,7 +34,7 @@ function LoginScreen() {
     });
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.screen}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.all}>
                 <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.background}>
                     <View style={styles.loginContainer}>
@@ -105,12 +105,6 @@ function LoginScreen() {
                         </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
-                <View style={styles.registerContainer}>
-                    <Text style={styles.registerContainerText}>Don't have an account?</Text>
-                    <Button
-                        onPress={() => navigation.navigate("Register")} title={"Register here"} color={"white"}
-                    />
-                </View>
             </View>
         </TouchableWithoutFeedback>
     );
@@ -127,17 +121,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: "center",
-        backgroundColor: "black",
+        backgroundColor: 'white',
     },
 
     button: {
         alignItems: "center",
-        backgroundColor: "white",
+        backgroundColor: "darkgreen",
         padding: 10,
+        marginTop: 10,
     },
 
     buttonText: {
-        color: "black",
+        color: "white",
         fontSize: 18,
     },
 
@@ -153,7 +148,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: "white",
+        color: "black",
         marginBottom: 8,
     },
 
@@ -165,22 +160,15 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         fontSize: 15,
         borderColor: "white",
+        backgroundColor: 'white',
+        color: 'black',
     },
 
     loginContainer: {
         padding: 10,
         width: '94%',
         borderRadius: 8,
-    },
-
-    registerContainer: {
-        justifyContent: "flex-end",
-        alignItems: "center",
-        paddingBottom: '10%',
-    },
-
-    registerContainerText: {
-        color: "white",
+        backgroundColor: 'lightblue',
     },
 
     screen: {
@@ -197,6 +185,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginHorizontal: 2,
         marginBottom: 2,
+        backgroundColor: 'lightblue',
     },
 });
 
