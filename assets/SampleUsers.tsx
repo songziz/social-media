@@ -1,27 +1,32 @@
-export default function SampleUsers() {
+export const SampleUsers = {
 
 
-    const user1 = {
-        username: 'we$money',
+    user1: {
+        username: 'wes-money',
         icon: '💸',
         uid: '3LcSVSL7VhPmaQugBS38xUBWl712',
-    }
+    },
 
-    const user2 = {
-        username: 'kingHenry',
+    user2: {
+        username: 'king-henry',
         icon: '👑',
         uid: 'fdj9FJ9eldkdfdn7dfj3Jd83jJfe',
-    }
+    },
 
-    const user3 = {
+    user3: {
         username: 'breezy',
         icon: '💨',
         uid: 'fgINdodme3kd93dj92jd245djFw',
-    }
+    },
 
-    const user4 = {
-        username: 'holderOfTime',
+    user4: {
+        username: 'holder-of-time',
         icon: '⏱️',
         uid: 'dfdfFIJFeod3r0f3mfod0fFOe4F',
-    }
+    },
+    empty: {
+        username: '',
+        icon: ' ',
+        uid: '',
+    },
 } 

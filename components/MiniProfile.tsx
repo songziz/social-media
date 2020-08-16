@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 import { useNavigation } from '@react-navigation/native';
+import {SampleUsers} from '../assets/SampleUsers';
 
 /**
  * A MiniProfile.
@@ -14,10 +15,8 @@ export default function MiniProfile({ uid, touchable = true, navLink }: { uid: s
 
   const nav = useNavigation();
 
-  const sampleUser = {
-    username: 'user-name',
-    emoji: '🔥',
-  };
+  const userData = SampleUsers;
+  const sampleUser = userData.user1;
 
   const goToFullProfile = () => {
     nav.navigate(navLink);
@@ -27,7 +26,7 @@ export default function MiniProfile({ uid, touchable = true, navLink }: { uid: s
     return (
       <TouchableOpacity style={[styles.container, {borderColor: 'black'}]} onPress={goToFullProfile}>
         <View style={styles.emojiContainer}>
-          <Text style={styles.emoji}>{sampleUser.emoji}</Text>
+          <Text style={styles.emoji}>{sampleUser.icon}</Text>
         </View>
         <View style={styles.usernameContainer}>
           <Text style={styles.username}>@ <MonoText style={styles.username}>{sampleUser.username}</MonoText></Text>
@@ -38,7 +37,7 @@ export default function MiniProfile({ uid, touchable = true, navLink }: { uid: s
     return (
       <View style={styles.container}>
         <View style={styles.emojiContainer}>
-          <Text style={styles.emoji}>{sampleUser.emoji}</Text>
+          <Text style={styles.emoji}>{sampleUser.icon}</Text>
         </View>
         <View style={styles.usernameContainer}>
           <Text style={styles.username}>@ <MonoText style={styles.username}>{sampleUser.username}</MonoText></Text>

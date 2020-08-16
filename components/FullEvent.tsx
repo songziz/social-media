@@ -48,9 +48,11 @@ export default function EventScreen({ uid, currentUser }: { uid: string, current
                     )
                 }
                 <MonoText style={styles.openingsText}>Openings:</MonoText>
-                <MiniProfile uid='sample' touchable={false} navLink={""} />
-                <MiniProfile uid='sample' touchable={false} navLink={""} />
-                <MiniProfile uid='sample' touchable={false} navLink={""} />
+                <MiniProfile uid='user1' touchable={false} navLink={""} />
+                <MiniProfile uid='user2' touchable={false} navLink={""} />
+                <MiniProfile uid='user3' touchable={false} navLink={""} />
+                <MiniProfile uid='empty' touchable={false} navLink={""} />
+                <MiniProfile uid='empty' touchable={false} navLink={""} />
                 <View style={{height: 300, width: '100%', backgroundColor: 'white'}}>
                     <Image style={{width: '100%', height: 300}} resizeMode={'cover'} source={{uri: sampleEvent.image}} />
                 </View>
