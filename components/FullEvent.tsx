@@ -51,7 +51,9 @@ export default function EventScreen({ uid, currentUser }: { uid: string, current
                 <MiniProfile uid='sample' touchable={false} navLink={""} />
                 <MiniProfile uid='sample' touchable={false} navLink={""} />
                 <MiniProfile uid='sample' touchable={false} navLink={""} />
-                <Image style={styles.image} source={{uri: sampleEvent.image}} />
+                <View style={{height: 300, width: '100%', backgroundColor: 'white'}}>
+                    <Image style={{width: '100%', height: 300}} resizeMode={'cover'} source={{uri: sampleEvent.image}} />
+                </View>
             </ScrollView>
         </View>
     );
