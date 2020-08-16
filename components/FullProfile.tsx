@@ -11,6 +11,8 @@ import { useState } from 'react';
 import { MonoText } from './StyledText';
 import { useNavigation } from '@react-navigation/native';
 
+import { auth, firebase } from "../firebase";
+
 const Stack = createStackNavigator();
 
 function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUser:boolean, isFriends: boolean}) {
@@ -33,7 +35,7 @@ function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUs
                 nav.navigate('ProfileScreen');
                 setInputtedTitle('');
                 setInputtedDescription('');
-                setInputtedOpenings(3);
+                setInputtedOpenings('3');
             }
 
             const nav = useNavigation();
@@ -99,7 +101,7 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
   };
 
   const logOut = () => {
-    console.log('Logged out.');
+    auth.signOut();
   };
 
   const nav = useNavigation();

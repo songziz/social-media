@@ -4,10 +4,10 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  FeedTab: undefined;
-  FriendsTab: undefined;
-  ProfileTab: undefined;
-  LandingTab: undefined;
+  Feed: undefined;
+  Friends: undefined;
+  Profile: undefined;
+  Account: undefined;
 };
 
 export type FeedTabParamList = {

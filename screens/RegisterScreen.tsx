@@ -8,7 +8,6 @@ import {
     Platform,
     TextInput,
     Text,
-    Button
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
@@ -39,7 +38,6 @@ function RegisterScreen() {
                 const uid = newUser.user!.uid;
                 //const user = await newCustomer({ email, uid });
                 //setUser(user);
-                navigation.navigate('Feed');
                 reset({ email: '', password: '' });
             }).catch((error: { message: any; }) => {
                 setError('email', {
@@ -265,6 +263,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         borderColor: "white",
         backgroundColor: 'white',
+        color: 'black',
     },
 
     passwordContainer: {
