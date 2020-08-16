@@ -233,6 +233,26 @@ export const createEvent = async (username: string, name: string, desc: string) 
   return await response.json();
 }
 
+// returns the icons of the uids in the array passed in
+export const getIcons = async (icons : string[]) => {
+  if (icons.length === 0) {
+    return [];
+  }
+  
+  const token : string = await firebase.auth().currentUser!.getIdToken();
+
+  const response = await fetch(
+    `${USERS}/icons?icons=${JSON.stringify(icons)}`,
+    fetchOptions('GET', token),
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  
+  return await response.json();
+}
+
 const fetchOptions = (method: string, idToken :string) => (
   {
     method: method,
