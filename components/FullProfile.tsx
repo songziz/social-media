@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, TextInput } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import MiniEvent from '../components/MiniEvent';
@@ -7,24 +7,82 @@ import MiniProfile from '../components/MiniProfile';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 import FullEvent from "../components/FullEvent"
+import { useState } from 'react';
+import { MonoText } from './StyledText';
+import { useNavigation } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 
 function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUser:boolean, isFriends: boolean}) {
   //TODO: replace with actual array of events based off of uid.
   const eventsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
+  const [inputtedTitle, setInputtedTitle] = useState<string>('');
+  const [inputtedDescription, setInputtedDescription] = useState<string>('');
+  const [inputtedOpenings, setInputtedOpenings] = useState<string>('');
+
   return (
-    <Stack.Navigator>
-        <Stack.Screen name="FeedScreen">
-            {() => Profile({uid: uid, eventsArray: eventsArray, currentUser: currentUser, isFriends: isFriends})}
+    <Stack.Navigator initialRouteName="ProfileScreen">
+        <Stack.Screen name="AddEventScreen">
+          {() => {     
+
+            const postEvent = () => {
+              leaveScreen();
+            }
+
+            const leaveScreen= () => {
+                nav.navigate('ProfileScreen');
+                setInputtedTitle('');
+                setInputtedDescription('');
+                setInputtedOpenings(3);
+            }
+
+            const nav = useNavigation();
+        
+            return (
+              <View style={styles.addFriendModalContainer}>
+                  <MonoText style={styles.enterUsernameText}>enter event info</MonoText>
+                  <TextInput
+                      style={styles.textInput}
+                      onChangeText={text => setInputtedTitle(text)}
+                      value={inputtedTitle}
+                      placeholder='Title'
+                      returnKeyType='done'
+                  />
+                  <TextInput
+                      style={styles.textInput}
+                      onChangeText={text => setInputtedDescription(text)}
+                      value={inputtedDescription}
+                      placeholder='Description'
+                      returnKeyType='done'
+                  />
+                  <TextInput
+                      style={styles.textInput}
+                      onChangeText={text => setInputtedOpenings(text)}
+                      value={inputtedOpenings}
+                      placeholder='Number of Openings'
+                      keyboardType='number-pad'
+                      returnKeyType='done'
+                  />
+                  <TouchableOpacity style={styles.addFriendTouchable} onPress={postEvent}>
+                      <MonoText style={styles.addFriendText}>post event</MonoText>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={[styles.addFriendTouchable, {backgroundColor: 'orange'}]} onPress={leaveScreen}>
+                      <MonoText style={styles.addFriendText}>cancel</MonoText>
+                  </TouchableOpacity>
+              </View>
+            )
+          }}
+        </Stack.Screen>
+        <Stack.Screen name="ProfileScreen">
+          {() => Profile({uid: uid, eventsArray: eventsArray, currentUser: currentUser, isFriends: isFriends})}
         </Stack.Screen>
         {eventsArray.map((uid) => (
-            <Stack.Screen
-                key={'profile-event' + uid}
-                name={'profile-event' + uid}
-            >
-                {() => FullEvent({uid: uid, currentUser: false})}
-            </Stack.Screen>
+          <Stack.Screen
+              key={'profile-event' + uid}
+              name={'profile-event' + uid}
+          >
+              {() => FullEvent({uid: uid, currentUser: false})}
+          </Stack.Screen>
         ))}
     </Stack.Navigator>
   )
@@ -44,6 +102,8 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
     console.log('Logged out.');
   };
 
+  const nav = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.stickyProfile}>
@@ -60,9 +120,14 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
           )
         }
         {currentUser &&
-          <TouchableOpacity style={styles.friendRequestContainer} onPress={logOut}>
-            <Text style={styles.friendRequestText}>log out</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonGroup}>
+            <TouchableOpacity style={styles.friendRequestContainer} onPress={logOut}>
+              <Text style={styles.friendRequestText}>log out</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.friendRequestContainer} onPress={() => nav.navigate('AddEventScreen')}>
+              <Text style={styles.friendRequestText}>post new event</Text>
+            </TouchableOpacity>
+          </View>
         }
       </View>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -81,6 +146,13 @@ export default function FullProfile({uid, currentUser=false, isFriends=false}: {
 }
 
 const styles = StyleSheet.create({
+  buttonGroup: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'pink',
+    width: '100%',
+    justifyContent: 'space-evenly',
+  },
   container: {
     flex: 1,
   },
@@ -116,4 +188,53 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink',
     paddingVertical: 8,
   },
+  addFriendContainer: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+   
+},
+addFriendModalContainer: {
+    width: '80%',
+    marginTop: '10%',
+    backgroundColor: 'lightgray',
+    alignSelf: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    height: '80%',
+},
+addFriendText: {
+    fontSize: 16,
+},
+addFriendTouchable: {
+    backgroundColor: 'lightblue',
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 5, 
+},
+enterUsernameText: {
+  fontSize: 16,
+},
+inputContainer: {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  height: 40,
+  width: '100%',
+  backgroundColor: 'lightgray',
+  alignSelf: 'center',
+},
+textInput: {
+  alignSelf: 'center',
+  backgroundColor: 'white',
+  width: '90%',
+  paddingLeft: 3,
+  paddingVertical: 7,
+  fontSize: 16,
+},
 }); 
