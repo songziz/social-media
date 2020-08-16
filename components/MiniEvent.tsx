@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Button } from 'react-native';
 
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
@@ -10,9 +10,10 @@ import { useNavigation } from "@react-navigation/native";
 /**
  * A MiniEvent.
  * @param {string, boolean} param0 event id and a boolean for whether to display
- * a MiniProfile at the top of the MiniEvent.
+ * a MiniProfile at the top of the MiniEvent. Also if currentUser, display option to
+ * mark the event as completed.
  */
-export default function MiniEvent({ uid, displayUser = true }: { uid: string, displayUser: boolean }) {
+export default function MiniEvent({ uid, displayUser, currentUser }: { uid: string, displayUser: boolean, currentUser: boolean }) {
   const nav = useNavigation();
 
   const sampleEvent = {
@@ -22,7 +23,7 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
   };
 
   const onPress = () => {
-    nav.navigate("EventScreen");
+    console.log('navigate to full event page');
   }
 
   const OpeningsSlots = sampleEvent.slots.map((slot, index) => {
@@ -32,6 +33,10 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
       </View>
     );
   });
+
+  const markComplete = () => {
+    console.log('Marked complete.');
+  };
 
   if (displayUser) {
     return (
@@ -48,6 +53,15 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
             {OpeningsSlots}
           </View>
         </View>
+        {currentUser && <View style={styles.separator} />}
+        {currentUser && 
+          <TouchableOpacity 
+            onPress={markComplete}
+            style={styles.completeContainer}
+          >
+            <Text style={styles.completeText}>Mark as Complete</Text>
+          </TouchableOpacity>
+        }
       </TouchableOpacity>
     );
   } else {
@@ -63,20 +77,42 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
             {OpeningsSlots}
           </View>
         </View>
+        {currentUser && <View style={styles.separator} />}
+        {currentUser && 
+          <TouchableOpacity 
+            onPress={markComplete}
+            style={styles.completeContainer}
+          >
+            <Text style={styles.completeText}>mark as complete</Text>
+          </TouchableOpacity>
+        }
       </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  completeContainer: {
+    alignSelf: 'center',
+    backgroundColor: 'orange',
+    marginBottom: 8,
+    marginTop: 10,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 5,
+  },
+  completeText: {
+    color: 'black',
+    fontSize: 16,
+  },
   container: {
     width: '95%',
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: 'green',
     display: 'flex',
     backgroundColor: 'white',
     borderRadius: 3,
-    margin: 2,
+    margin: 4,
     padding: 2,
   },
   openingsContainer: {

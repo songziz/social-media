@@ -14,7 +14,6 @@ function FeedStack() {
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="FeedScreen" component={Feed} />
-            <Stack.Screen name="EventScreen" component={EventScreen} />
         </Stack.Navigator>
     )
 }
@@ -23,12 +22,12 @@ function Feed() {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
+                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
+                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
+                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
+                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
+                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
+                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
             </ScrollView>
         </View>
     );
