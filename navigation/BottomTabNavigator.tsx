@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import * as React from 'react';
 
 import Colors from '../constants/Colors';
@@ -13,6 +13,7 @@ import { BottomTabParamList, FeedTabParamList, FriendsTabParamList, ProfileTabPa
 import LandingScreen from '../screens/LandingScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const sample_uid = 'sampleuid';
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -69,9 +70,10 @@ function FeedTabNavigator() {
     <FeedTabStack.Navigator>
       <FeedTabStack.Screen
         name="FeedTabScreen"
-        component={FeedScreen}
         options={{ headerTitle: 'Feed' }}
-      />
+      >
+        {() => FeedScreen({uid: sample_uid})}
+      </FeedTabStack.Screen>
     </FeedTabStack.Navigator>
   );
 }
@@ -82,10 +84,11 @@ function FriendsTabNavigator() {
   return (
     <FriendsTabStack.Navigator>
       <FriendsTabStack.Screen
-        name="FriendsScreen"
-        component={FriendsScreen}
+        name="FriendsTabScreen"
         options={{ headerTitle: 'Friends' }}
-      />
+      >
+        {() => FriendsScreen({uid: sample_uid})}
+      </FriendsTabStack.Screen>
     </FriendsTabStack.Navigator>
   );
 }

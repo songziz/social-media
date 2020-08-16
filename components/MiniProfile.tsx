@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
  * @param {string, boolean} param0 The Uid of the profile and a boolean for whether the
  * MiniProfile should be clickable.
  */
-export default function MiniProfile({ uid, touchable = true }: { uid: string, touchable: boolean }) {
+export default function MiniProfile({ uid, touchable = true, navLink }: { uid: string, touchable: boolean, navLink: string }) {
 
   const nav = useNavigation();
 
@@ -19,13 +19,13 @@ export default function MiniProfile({ uid, touchable = true }: { uid: string, to
     emoji: '🔥',
   };
 
-  const onPress = () => {
-    nav.navigate("FriendInfoScreen");
+  const goToFullProfile = () => {
+    nav.navigate(navLink);
   }
 
   if (touchable) {
     return (
-      <TouchableOpacity style={[styles.container, {borderColor: 'black'}]} onPress={onPress}>
+      <TouchableOpacity style={[styles.container, {borderColor: 'black'}]} onPress={goToFullProfile}>
         <View style={styles.emojiContainer}>
           <Text style={styles.emoji}>{sampleUser.emoji}</Text>
         </View>

@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
  * a MiniProfile at the top of the MiniEvent. Also if currentUser, display option to
  * mark the event as completed.
  */
-export default function MiniEvent({ uid, displayUser, currentUser }: { uid: string, displayUser: boolean, currentUser: boolean }) {
+export default function MiniEvent({ uid, displayUser, currentUser, navLink }: { uid: string, displayUser: boolean, currentUser: boolean, navLink: string }) {
   const nav = useNavigation();
 
   const sampleEvent = {
@@ -23,8 +23,7 @@ export default function MiniEvent({ uid, displayUser, currentUser }: { uid: stri
   };
 
   const onPress = () => {
-    nav.navigate('FullEvent');
-    console.log('navigate to full event page');
+    nav.navigate(navLink);
   }
 
   const OpeningsSlots = sampleEvent.slots.map((slot, index) => {
@@ -42,7 +41,7 @@ export default function MiniEvent({ uid, displayUser, currentUser }: { uid: stri
   if (displayUser) {
     return (
       <TouchableOpacity style={styles.container} onPress={onPress}>
-        <MiniProfile uid='sample' touchable={false} />
+        <MiniProfile uid='sample' touchable={false} navLink={''} />
         <View style={styles.separator} />
         <View style={styles.titleContainer}>
           <MonoText style={styles.title}>{sampleEvent.title}</MonoText>

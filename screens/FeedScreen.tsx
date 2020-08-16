@@ -10,33 +10,41 @@ import FullEvent from "../components/FullEvent"
 
 const Stack = createStackNavigator();
 
-function FeedStack() {
+function FeedStack({uid}: {uid: string}) {
+    //TODO: replace with actual array of events based off of uid.
+    const eventsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
     return (
         <Stack.Navigator headerMode="none">
-            <Stack.Screen name="FeedScreen" component={Feed} />
-            <Stack.Screen name="FullEvent" component={FullEvent} />
+            <Stack.Screen name="FeedScreen">
+                {() => Feed({eventsArray: eventsArray})}
+            </Stack.Screen>
+            {eventsArray.map((uid) => (
+                <Stack.Screen
+                    key={'friends' + uid}
+                    name={'friends' + uid}
+                >
+                    {() => FullEvent({uid: uid, currentUser: false})}
+                </Stack.Screen>
+            ))}
         </Stack.Navigator>
     )
 }
 
-function Feed() {
+function Feed({eventsArray} : {eventsArray: string[]}) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
-                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
-                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
-                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
-                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
-                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
-                <MiniEvent uid='sample' displayUser={true} currentUser={false}/>
+                {eventsArray.map((uid) => (
+                    <MiniEvent uid={uid} key={'friends' + uid} displayUser={true} currentUser={false} navLink={'friends' + uid}/>
+                ))}
             </ScrollView>
         </View>
     );
 }
 
-export default function FeedScreen() {
+export default function FeedScreen({uid}: {uid: string}) {
     return (
-        <FeedStack />
+        <FeedStack uid={uid}/>
     )
 }
 

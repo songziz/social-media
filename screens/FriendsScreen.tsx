@@ -1,47 +1,49 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import MiniProfile from '../components/MiniProfile';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ScrollView } from 'react-native-gesture-handler';
+import FullProfile from '../components/FullProfile';
 
 const Stack = createStackNavigator();
 
-function FriendsStack() {
+function FriendsStack({uid} : {uid: string}) {
+    //TODO: replace with actual array of friends based off of uid.
+    const friendsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
     return (
-        <Stack.Navigator headerMode="none">
-            <Stack.Screen name="FriendsScreen" component={Friends} />
+        <Stack.Navigator headerMode="none" initialRouteName="FriendsScreen">
+            <Stack.Screen name="FriendsScreen">
+                {() => Friends({friendsArray: friendsArray})} 
+            </Stack.Screen>
+            {friendsArray.map((uid) => (
+                <Stack.Screen
+                    key={'friends' + uid}
+                    name={'friends' + uid}
+                >
+                    {() => FullProfile({uid: uid, currentUser: false})}
+                </Stack.Screen>
+            ))}
         </Stack.Navigator>
     )
 }
 
-function Friends() {
+function Friends({friendsArray}: {friendsArray: string[]}) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
-                <MiniProfile uid='sample' touchable={true} />
+                {friendsArray.map((uid) => (
+                    <MiniProfile uid={uid} key={'friends' + uid} touchable={true} navLink={'friends' + uid}/>
+                ))}
             </ScrollView>
         </View>
     );
 }
 
-export default function FriendsScreen() {
+export default function FriendsScreen({uid}: {uid: string}) {
     return (
-        <FriendsStack />
+        <FriendsStack uid={uid} />
     )
 }
 
