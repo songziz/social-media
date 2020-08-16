@@ -12,6 +12,7 @@ import { MonoText } from './StyledText';
 import { useNavigation } from '@react-navigation/native';
 
 import { auth, firebase } from "../firebase";
+import { createEvent } from '../util/api-functions';
 
 const Stack = createStackNavigator();
 
@@ -25,9 +26,17 @@ function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUs
   return (
     <Stack.Navigator initialRouteName="ProfileScreen">
         <Stack.Screen name="AddEventScreen">
-          {() => {     
+          {() => {
 
-            const postEvent = () => {
+            const postEvent = async (title: string, description: string) => {
+              console.log(auth.currentUser!.uid);
+              console.log(inputtedDescription);
+              console.log(inputtedTitle);
+              try {
+                await createEvent('Grant', title, description, 'grant');
+              } catch (error) {
+                console.log(error.message);
+              }
               leaveScreen();
             }
 
@@ -39,7 +48,7 @@ function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUs
             }
 
             const nav = useNavigation();
-        
+
             return (
               <View style={styles.addFriendModalContainer}>
                   <MonoText style={styles.enterUsernameText}>enter event info</MonoText>
@@ -65,7 +74,7 @@ function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUs
                       keyboardType='number-pad'
                       returnKeyType='done'
                   />
-                  <TouchableOpacity style={styles.addFriendTouchable} onPress={postEvent}>
+                  <TouchableOpacity style={styles.addFriendTouchable} onPress={() => postEvent(inputtedTitle, inputtedDescription)}>
                       <MonoText style={styles.addFriendText}>post event</MonoText>
                   </TouchableOpacity>
                   <TouchableOpacity style={[styles.addFriendTouchable, {backgroundColor: 'orange'}]} onPress={leaveScreen}>
@@ -102,7 +111,7 @@ function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUs
 };
 
 function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: string, eventsArray: string[], currentUser: boolean, isFriends: boolean}) {
-  
+
   const sendFriendRequest = () => {
     console.log('Friend request sent.');
   };
@@ -121,7 +130,7 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
     <View style={styles.container}>
       <View style={styles.stickyProfile}>
         <MiniProfile uid={uid} touchable={false} navLink={''}/>
-        {!currentUser && 
+        {!currentUser &&
           (isFriends ?
             <TouchableOpacity style={styles.friendRequestContainer} onPress={unfriend}>
               <Text style={styles.friendRequestText}>unfriend</Text>
@@ -210,7 +219,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-   
+
 },
 addFriendModalContainer: {
     width: '80%',
@@ -231,7 +240,7 @@ addFriendTouchable: {
     paddingVertical: 3,
     borderWidth: 1,
     borderColor: 'white',
-    borderRadius: 5, 
+    borderRadius: 5,
 },
 enterUsernameText: {
   fontSize: 16,
@@ -253,4 +262,4 @@ textInput: {
   paddingVertical: 7,
   fontSize: 16,
 },
-}); 
+});
