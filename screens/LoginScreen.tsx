@@ -25,7 +25,6 @@ function LoginScreen() {
         await auth.signInWithEmailAndPassword(email, password)
             .then(() => {
                 reset({ email: '', password: '' });
-                navigation.navigate("Feed");
             })
             .catch((error: { message: any; }) => {
                 setError('email', {

@@ -12,45 +12,65 @@ import ProfileScreen from '../screens/ProfileScreen';
 import { BottomTabParamList, FeedTabParamList, FriendsTabParamList, ProfileTabParamList, LandingTabParamList } from '../types';
 import LandingScreen from '../screens/LandingScreen';
 
+import { firebase, auth } from "../firebase";
+import { useState } from 'react';
+
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 const sample_uid = 'sampleuid';
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
+  const [userState, setUserState] = useState<boolean>(!!auth.currentUser);
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      setUserState(true);
+    } else {
+      setUserState(false);
+    }
+  });
+
   return (
     <BottomTab.Navigator
-      initialRouteName="FeedTab"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
-      <BottomTab.Screen
-        name="FeedTab"
-        component={FeedTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="FriendsTab"
-        component={FriendsTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="ProfileTab"
-        component={ProfileTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
-        }}
-      />
-
-      <BottomTab.Screen
-        name="LandingTab"
-        component={LandingTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-color-wand" color={color} />,
-        }}
-      />
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+    >
+      {auth.currentUser ? (
+        <>
+          <BottomTab.Screen
+            name="Feed"
+            component={FeedTabNavigator}
+            options={{
+              tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
+            }}
+          />
+          <BottomTab.Screen
+            name="Friends"
+            component={FriendsTabNavigator}
+            options={{
+              tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
+            }}
+          />
+          <BottomTab.Screen
+            name="Profile"
+            component={ProfileTabNavigator}
+            options={{
+              tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <BottomTab.Screen
+            name="Account"
+            component={LandingTabNavigator}
+            options={{
+              tabBarIcon: ({ color }) => <TabBarIcon name="ios-color-wand" color={color} />,
+            }}
+          />
+        </>
+      )
+      }
     </BottomTab.Navigator>
   );
 }
@@ -115,7 +135,7 @@ function LandingTabNavigator() {
       <LandingTabStack.Screen
         name="LandingTabScreen"
         component={LandingScreen}
-        options={{ headerTitle: 'Landing' }}
+        options={{ headerTitle: 'Login or Register' }}
       />
     </LandingTabStack.Navigator>
   );
