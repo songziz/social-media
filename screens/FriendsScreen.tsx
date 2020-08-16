@@ -17,7 +17,7 @@ const Stack = createStackNavigator();
 
 function FriendsStack({uid} : {uid: string}) {
     //TODO: replace with actual array of friends based off of uid.
-    const friendsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
+    const friendsArray = ['user1', 'user2', 'user3', 'user4'];
     const [inputtedUsername, setInputtedUsername] = useState<string>('');
 
     return (
