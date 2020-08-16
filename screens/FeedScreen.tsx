@@ -6,7 +6,7 @@ import MiniEvent from '../components/MiniEvent';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import EventScreen from "../screens/EventScreen";
+import FullEvent from "../components/FullEvent"
 
 const Stack = createStackNavigator();
 
