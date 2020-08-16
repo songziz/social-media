@@ -14,14 +14,22 @@ export default function EventScreen({ uid, currentUser }: { uid: string, current
         console.log(joined);
     };
 
+    const sampleEvent = {
+        title: 'Super fun event!!!',
+        description: 'Come to my event for a really good time',
+        image: './sampleurl'
+    };
+
+    // const imageURL = 
+
     return (
         <View style={styles.container}>
             <View style={styles.stickyProfile}>
                 <MiniProfile uid={uid} touchable={false} navLink={""} />
             </View>
             <ScrollView contentContainerStyle={styles.scroll}>
-                <MonoText style={styles.title}>Event Title</MonoText>
-                <MonoText style={styles.descriptionText}>Event Description:</MonoText>
+                <MonoText style={styles.title}>{sampleEvent.title}</MonoText>
+                <MonoText style={styles.descriptionText}>{sampleEvent.description}</MonoText>
                 {currentUser &&
                     <TouchableOpacity style={styles.button} onPress={onPress}>
                         <MonoText style={styles.buttonText}>Delete Event!</MonoText>
@@ -52,7 +60,7 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: "lightblue",
         height: "15%",
-        width: "100%",
+        width: "50%",
         padding: 10,
         alignItems: "center",
     },
