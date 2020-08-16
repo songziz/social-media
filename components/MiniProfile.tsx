@@ -16,7 +16,18 @@ export default function MiniProfile({ uid, touchable = true, navLink }: { uid: s
   const nav = useNavigation();
 
   const userData = SampleUsers;
-  const sampleUser = userData.user1;
+  let sampleUser;
+  if(uid=='user1') {
+    sampleUser = userData.user1;
+  } else if (uid == 'user2') {
+    sampleUser = userData.user2;
+  } else if (uid == 'user3') {
+    sampleUser = userData.user3;
+  } else if (uid == 'user4') {
+    sampleUser = userData.user4;
+  } else {
+    sampleUser = userData.empty;
+  }
 
   const goToFullProfile = () => {
     nav.navigate(navLink);
