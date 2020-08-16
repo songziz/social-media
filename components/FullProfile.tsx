@@ -43,7 +43,7 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
   const logOut = () => {
     console.log('Logged out.');
   };
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.stickyProfile}>
@@ -59,7 +59,7 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
             </TouchableOpacity>
           )
         }
-        {currentUser && 
+        {currentUser &&
           <TouchableOpacity style={styles.friendRequestContainer} onPress={logOut}>
             <Text style={styles.friendRequestText}>log out</Text>
           </TouchableOpacity>

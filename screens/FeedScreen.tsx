@@ -10,41 +10,45 @@ import FullEvent from "../components/FullEvent"
 
 const Stack = createStackNavigator();
 
-function FeedStack({uid}: {uid: string}) {
+function FeedStack({ uid }: { uid: string }) {
     //TODO: replace with actual array of events based off of uid.
     const eventsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="FeedScreen">
-                {() => Feed({eventsArray: eventsArray})}
+                {() => Feed({ eventsArray: eventsArray })}
             </Stack.Screen>
             {eventsArray.map((uid) => (
                 <Stack.Screen
                     key={'event' + uid}
                     name={'event' + uid}
                 >
-                    {() => FullEvent({uid: uid, currentUser: false})}
+                    {() => FullEvent({ uid: uid, currentUser: false })}
                 </Stack.Screen>
             ))}
         </Stack.Navigator>
     )
 }
 
-function Feed({eventsArray} : {eventsArray: string[]}) {
+function Feed({ eventsArray }: { eventsArray: string[] }) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
                 {eventsArray.map((uid) => (
+<<<<<<< HEAD
                     <MiniEvent uid={uid} key={'event' + uid} displayUser={true} currentUser={false} navLink={'event' + uid}/>
+=======
+                    <MiniEvent uid={uid} key={'friends' + uid} displayUser={true} currentUser={false} navLink={'friends' + uid} />
+>>>>>>> 13994e3b5786501fb97f8c049749a6c31c3b9283
                 ))}
             </ScrollView>
         </View>
     );
 }
 
-export default function FeedScreen({uid}: {uid: string}) {
+export default function FeedScreen({ uid }: { uid: string }) {
     return (
-        <FeedStack uid={uid}/>
+        <FeedStack uid={uid} />
     )
 }
 
