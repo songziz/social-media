@@ -15,6 +15,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { auth, firebase } from "../firebase";
+import { createUser } from "../util/api-functions";
 
 
 type FormData = {
@@ -32,11 +33,11 @@ function RegisterScreen() {
         FormData
     >();
 
-    const onSubmit = handleSubmit(async ({ email, password }) => {
+    const onSubmit = handleSubmit(async ({ email, password, username, emoji }) => {
         const shouldGo = await auth.createUserWithEmailAndPassword(email, password)
             .then(async (newUser: firebase.auth.UserCredential) => {
                 const uid = newUser.user!.uid;
-                //const user = await newCustomer({ email, uid });
+                const user = await createUser(uid, username, emoji);
                 //setUser(user);
                 reset({ email: '', password: '' });
             }).catch((error: { message: any; }) => {
