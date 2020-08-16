@@ -26,21 +26,21 @@ export default function BottomTabNavigator() {
         name="FeedTab"
         component={FeedTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="FriendsTab"
         component={FriendsTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="ProfileTab"
         component={ProfileTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
         }}
       />
 
@@ -48,7 +48,7 @@ export default function BottomTabNavigator() {
         name="LandingTab"
         component={LandingTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-color-wand" color={color} />,
         }}
       />
     </BottomTab.Navigator>
