@@ -1,26 +1,39 @@
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
 import { Text, View } from './Themed';
 import { MonoText } from './StyledText';
 import MiniProfile from './MiniProfile';
 
 export default function EventScreen() {
+    const [joined, setJoined] = useState<boolean>(false);
+
+    const onPress = () => {
+        setJoined(!joined);
+    };
+
     return (
         <View style={styles.container}>
-            <View style={styles.eventInfo}>
+            <View style={styles.stickyProfile}>
+                <MiniProfile uid={""} touchable={false} />
+            </View>
+            <ScrollView contentContainerStyle={styles.scroll}>
                 <MonoText style={styles.title}>Event Title</MonoText>
                 <MonoText style={styles.descriptionText}>Event Description:</MonoText>
-                <TouchableOpacity style={styles.button}><MonoText style={styles.buttonText}>Join Event!</MonoText></TouchableOpacity>
+                {joined &&
+                    <TouchableOpacity style={styles.button} onPress={onPress}>
+                        <MonoText style={styles.buttonText}>Leave Event!</MonoText>
+                    </TouchableOpacity>}
+                {!joined &&
+                    <TouchableOpacity style={styles.button} onPress={onPress}>
+                        <MonoText style={styles.buttonText}>Join Event!</MonoText>
+                    </TouchableOpacity>}
                 <MonoText style={styles.openingsText}>Openings:</MonoText>
                 <MiniProfile uid='sample' touchable={false} />
                 <MiniProfile uid='sample' touchable={false} />
                 <MiniProfile uid='sample' touchable={false} />
-            </View>
-            <View style={styles.userInfo}>
-                <MonoText style={styles.postText}>Posted by:</MonoText>
-                <MiniProfile uid='sample' touchable={false} />
-            </View>
+            </ScrollView>
         </View>
     );
 }
@@ -28,7 +41,7 @@ export default function EventScreen() {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: "white",
-        height: "10%",
+        height: "15%",
         width: "100%",
         padding: 10,
         alignItems: "center",
@@ -43,10 +56,7 @@ const styles = StyleSheet.create({
     descriptionText: {
         fontSize: 15,
         alignSelf: "flex-start",
-    },
-    eventInfo: {
-        flex: 0.8,
-        alignItems: "center",
+        paddingBottom: 10,
     },
     openingsText: {
         fontSize: 15,
@@ -59,17 +69,28 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 30,
         fontWeight: 'bold',
+        paddingTop: 25,
+    },
+    scroll: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: "center",
     },
     separator: {
         marginVertical: 30,
         height: 1,
         width: '80%',
     },
+    stickyProfile: {
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: 'pink',
+        paddingVertical: 8,
+    },
     userInfo: {
         flex: 0.2,
         justifyContent: "flex-end",
         paddingBottom: 20,
         width: "100%",
-
     }
 });
