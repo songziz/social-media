@@ -7,15 +7,15 @@ import {
     KeyboardAvoidingView,
     Platform,
     TextInput,
+    Text,
+    Button
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Text } from "@ui-kitten/components";
 import { useForm, Controller } from "react-hook-form";
 import firebase from 'firebase';
 import '@firebase/auth';
 
 import { Feather } from "@expo/vector-icons";
-import { allNumbers, parsePhoneNum } from "../util/util-functions";
 
 const auth = firebase.auth();
 
@@ -141,24 +141,21 @@ function RegisterScreen() {
                         />
 
                         <Button
-                            style={styles.button}
                             onPress={() => {
                                 onSubmit();
                             }}
+                            title={"Register"}
                         >
-                            Register
-          </Button>
+                        </Button>
                     </View>
                 </KeyboardAvoidingView>
                 <View style={styles.loginContainer}>
                     <Text>Already have an account?</Text>
                     <Button
-                        appearance="ghost"
-                        status="primary"
                         onPress={() => navigation.navigate("Login")}
+                        title="Log in here"
                     >
-                        Log in here
-        </Button>
+                    </Button>
                 </View>
             </View>
         </TouchableWithoutFeedback>
