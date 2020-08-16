@@ -98,12 +98,12 @@ function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUs
             );
           }}
         </Stack.Screen>
-        {eventsArray.map((uid) => (
+        {eventsArray.map((eventid) => (
           <Stack.Screen
-              key={'profile-event' + uid}
-              name={'profile-event' + uid}
+              key={'profile-event' + eventid}
+              name={'profile-event' + eventid}
           >
-              {() => FullEvent({uid: uid, currentUser: false})}
+              {() => FullEvent({uid: eventid, currentUser: false, createdUser: uid})}
           </Stack.Screen>
         ))}
     </Stack.Navigator>

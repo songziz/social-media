@@ -5,9 +5,8 @@ import { StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Text, View } from './Themed';
 import { MonoText } from './StyledText';
 import MiniProfile from './MiniProfile';
-import { getImg } from '../util/api-functions';
 
-export default function EventScreen({ uid, currentUser }: { uid: string, currentUser: boolean }) {
+export default function EventScreen({ uid, createdUser, currentUser }: { uid: string, createdUser:string, currentUser: boolean }) {
     const [joined, setJoined] = useState<boolean>(false);
 
     const onPress = () => {
@@ -26,7 +25,7 @@ export default function EventScreen({ uid, currentUser }: { uid: string, current
     return (
         <View style={styles.container}>
             <View style={styles.stickyProfile}>
-                <MiniProfile uid={uid} touchable={false} navLink={""} />
+                <MiniProfile uid={createdUser} touchable={false} navLink={""} />
             </View>
             <ScrollView contentContainerStyle={styles.scroll}>
                 <MonoText style={styles.title}>{sampleEvent.title}</MonoText>
