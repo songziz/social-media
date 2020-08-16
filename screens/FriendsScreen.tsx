@@ -109,10 +109,10 @@ const Friends = ({friendsArray}: {friendsArray: string[]}) => {
         <View style={styles.container}>
             <View style={styles.addFriendContainer}>
                 <TouchableOpacity style={styles.addFriendTouchable} onPress={() => nav.navigate('AddFriendScreen')}>
-                    <MonoText style={styles.addFriendText}>+ add a friend</MonoText>
+                    <MonoText style={styles.addFriendText}>add friend</MonoText>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.addFriendTouchable} onPress={() => nav.navigate('FriendRequestScreen')}>
-                    <MonoText style={styles.addFriendText}>incoming requests</MonoText>
+                    <MonoText style={styles.addFriendText}>friend requests</MonoText>
                 </TouchableOpacity>
             </View>
             <ScrollView contentContainerStyle={styles.scroll}>
