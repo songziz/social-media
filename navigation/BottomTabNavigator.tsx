@@ -37,13 +37,13 @@ export default function BottomTabNavigator() {
     >
       {auth.currentUser ? (
         <>
-          <BottomTab.Screen
+          {/* <BottomTab.Screen
             name="Feed"
             component={FeedTabNavigator}
             options={{
               tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
             }}
-          />
+          /> */}
           <BottomTab.Screen
             name="Friends"
             component={FriendsTabNavigator}
@@ -116,13 +116,17 @@ function FriendsTabNavigator() {
 const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
 
 function ProfileTabNavigator() {
+
+  const loggedInUID = auth.currentUser!.uid;
+
   return (
     <ProfileTabStack.Navigator>
       <ProfileTabStack.Screen
         name="ProfileTabScreen"
-        component={ProfileScreen}
         options={{ headerTitle: 'Profile' }}
-      />
+      >
+        {() => ProfileScreen({uid: loggedInUID})}
+      </ProfileTabStack.Screen>
     </ProfileTabStack.Navigator>
   );
 }

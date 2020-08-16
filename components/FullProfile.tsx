@@ -78,6 +78,17 @@ function FullProfileStack({uid, currentUser, isFriends}: {uid: string, currentUs
         <Stack.Screen name="ProfileScreen">
           {() => Profile({uid: uid, eventsArray: eventsArray, currentUser: currentUser, isFriends: isFriends})}
         </Stack.Screen>
+        <Stack.Screen name="RecentsScreen">
+          {() => {
+            return(
+              <ScrollView contentContainerStyle={{display: 'flex', alignItems: 'center'}}>
+                {eventsArray.map((uid) => (
+                  <MiniEvent uid={uid} displayUser={true} currentUser={false} navLink={''} />
+                ))}
+              </ScrollView>
+            );
+          }}
+        </Stack.Screen>
         {eventsArray.map((uid) => (
           <Stack.Screen
               key={'profile-event' + uid}
@@ -123,18 +134,21 @@ function Profile({uid, eventsArray, currentUser=false, isFriends=false}: {uid: s
         }
         {currentUser &&
           <View style={styles.buttonGroup}>
+            <TouchableOpacity style={styles.friendRequestContainer} onPress={() => nav.navigate('AddEventScreen')}>
+              <Text style={styles.friendRequestText}>post event</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.friendRequestContainer} onPress={() => nav.navigate('RecentsScreen')}>
+              <Text style={styles.friendRequestText}>interested</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.friendRequestContainer} onPress={logOut}>
               <Text style={styles.friendRequestText}>log out</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.friendRequestContainer} onPress={() => nav.navigate('AddEventScreen')}>
-              <Text style={styles.friendRequestText}>post new event</Text>
             </TouchableOpacity>
           </View>
         }
       </View>
       <ScrollView contentContainerStyle={styles.scroll}>
         {eventsArray.map((uid) => (
-          <MiniEvent uid={uid} key={'profile-event' + uid} displayUser={false} currentUser={currentUser} navLink={'profile-event' + uid}/>
+          <MiniEvent uid={uid} key={'profile-event' + uid} displayUser={!currentUser} currentUser={currentUser} navLink={'profile-event' + uid}/>
         ))}
       </ScrollView>
     </View>
