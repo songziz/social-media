@@ -22,14 +22,22 @@ export default function EventScreen({ uid, currentUser }: { uid: string, current
             <ScrollView contentContainerStyle={styles.scroll}>
                 <MonoText style={styles.title}>Event Title</MonoText>
                 <MonoText style={styles.descriptionText}>Event Description:</MonoText>
-                {joined &&
+                {currentUser &&
                     <TouchableOpacity style={styles.button} onPress={onPress}>
-                        <MonoText style={styles.buttonText}>Leave Event!</MonoText>
-                    </TouchableOpacity>}
-                {!joined &&
-                    <TouchableOpacity style={styles.button} onPress={onPress}>
-                        <MonoText style={styles.buttonText}>Join Event!</MonoText>
-                    </TouchableOpacity>}
+                        <MonoText style={styles.buttonText}>Delete Event!</MonoText>
+                    </TouchableOpacity>
+                }
+                {!currentUser &&
+                    (joined ?
+                        <TouchableOpacity style={styles.button} onPress={onPress}>
+                            <MonoText style={styles.buttonText}>Leave Event!</MonoText>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={styles.button} onPress={onPress}>
+                            <MonoText style={styles.buttonText}>Join Event!</MonoText>
+                        </TouchableOpacity>
+                    )
+                }
 
                 <MonoText style={styles.openingsText}>Openings:</MonoText>
                 <MiniProfile uid='sample' touchable={false} navLink={""} />
