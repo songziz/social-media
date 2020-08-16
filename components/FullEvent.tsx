@@ -7,7 +7,7 @@ import { MonoText } from './StyledText';
 import MiniProfile from './MiniProfile';
 import { getImg } from '../util/api-functions';
 
-export default async function EventScreen({ uid, currentUser }: { uid: string, currentUser: boolean }) {
+export default function EventScreen({ uid, currentUser }: { uid: string, currentUser: boolean }) {
     const [joined, setJoined] = useState<boolean>(false);
 
     const onPress = () => {
@@ -18,10 +18,10 @@ export default async function EventScreen({ uid, currentUser }: { uid: string, c
     const sampleEvent = {
         title: 'Super fun event!!!',
         description: 'Come to my event for a really good time',
-        image: './sampleurl'
+        image: 'https://firebasestorage.googleapis.com/v0/b/hack20-52610.appspot.com/o/images%2Fpexels-andrea-piacquadio-864939.jpg?alt=media&token=494c23e4-9575-4692-8a65-9279557c33c6',
     };
 
-    const imageURL = await getImg(sampleEvent.image);
+    // const imgGetter = await getImg(sampleEvent.image).then((url) => {setImageState(url); console.log(url);}).catch(() => {setImageState(null)});
 
     return (
         <View style={styles.container}>
@@ -51,7 +51,7 @@ export default async function EventScreen({ uid, currentUser }: { uid: string, c
                 <MiniProfile uid='sample' touchable={false} navLink={""} />
                 <MiniProfile uid='sample' touchable={false} navLink={""} />
                 <MiniProfile uid='sample' touchable={false} navLink={""} />
-                <Image source={imageURL}></Image>
+                <Image style={styles.image} source={{uri: sampleEvent.image}} />
             </ScrollView>
         </View>
     );
@@ -60,7 +60,7 @@ export default async function EventScreen({ uid, currentUser }: { uid: string, c
 const styles = StyleSheet.create({
     button: {
         backgroundColor: "lightblue",
-        height: "15%",
+        height: 60,
         width: "50%",
         padding: 10,
         alignItems: "center",
@@ -77,6 +77,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         alignSelf: "flex-start",
         paddingBottom: 10,
+    },
+    image: {
     },
     openingsText: {
         fontSize: 15,
