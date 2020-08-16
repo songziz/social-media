@@ -1,32 +1,189 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, Text, Button } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
+import { TextInput } from 'react-native-gesture-handler';
 
-export default function LoginScreen() {
+import { useForm, Controller } from 'react-hook-form';
+import { useNavigation } from "@react-navigation/native";
+
+interface FormData {
+    email: string;
+    password: string;
+}
+
+function LoginScreen() {
+
+    const { control, setError, handleSubmit, errors, reset } = useForm<
+        FormData
+    >();
+    const navigation = useNavigation();
+
+    const onSubmit = handleSubmit(async ({ email, password }) => {
+        // await auth.signInWithEmailAndPassword(email, password)
+        //     .then(() => {
+        //         reset({ email: '', password: '' });
+        //         navigation.navigate("Feed");
+        //     })
+        //     .catch((error: { message: any; }) => {
+        //         setError('email', {
+        //             type: 'firebase',
+        //             message: error.message,
+        //         });
+        //     });
+    });
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <EditScreenInfo path="/screens/LoginScreen.tsx" />
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.screen}>
+            <View style={styles.all}>
+                <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.background}>
+                    <View style={styles.loginContainer}>
+                        <Text style={styles.header}>✍️ Log in</Text>
+
+                        {errors.email?.type === 'firebase' && (
+                            <Text style={[styles.errorText, styles.errorTextFirebase]}>{errors.email?.message}</Text>
+                        )}
+
+                        <View style={styles.subheaderContainer}>
+                            <Text style={styles.subheader}>Email Address</Text>
+                            <View>
+                                {errors.email?.type === "required" && (
+                                    <Text style={styles.errorText}>This field is required.</Text>
+                                )}
+                                {errors.email?.type === "pattern" && (
+                                    <Text style={styles.errorText}>
+                                        Invalid email.
+                                    </Text>
+                                )}
+                            </View>
+                        </View>
+                        <Controller
+                            control={control}
+                            render={({ onChange, onBlur, value }) => (
+                                <TextInput
+                                    style={styles.inputField}
+                                    onBlur={onBlur}
+                                    placeholder="Email Address"
+                                    value={value}
+                                    onChangeText={(value) => onChange(value)}
+                                    returnKeyType='done'
+                                />
+                            )}
+                            name='email'
+                            rules={{ required: true, pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/ }}
+                            defaultValue=''
+                        />
+
+
+                        <View style={styles.subheaderContainer}>
+                            <Text style={styles.subheader}>Password</Text>
+                            <View>
+                                {errors.password?.type === 'required' && (
+                                    <Text style={styles.errorText}>This field is required.</Text>
+                                )}
+                            </View>
+                        </View>
+                        <Controller
+                            control={control}
+                            render={({ onChange, onBlur, value }) => (
+                                <TextInput
+                                    style={styles.inputField}
+                                    placeholder="Password"
+                                    onBlur={onBlur}
+                                    value={value}
+                                    onChangeText={(value) => onChange(value)}
+                                    returnKeyType='done'
+                                    secureTextEntry
+                                />
+                            )}
+                            name="password"
+                            rules={{ required: true }}
+                            defaultValue=""
+                        />
+                        <Button onPress={onSubmit} title={"Log in with email"} />
+                    </View>
+                </KeyboardAvoidingView>
+                <View style={styles.registerContainer}>
+                    <Text>Don't have an account?</Text>
+                    <Button
+                        onPress={() => navigation.navigate("Register")} title={"Register here"}
+                    />
+                </View>
+            </View>
+        </TouchableWithoutFeedback>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    all: {
+        width: '100%',
+        height: '100%',
+    },
+
+    background: {
+        display: 'flex',
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: "center",
+        backgroundColor: "black",
     },
-    title: {
-        fontSize: 20,
+
+    button: {
+        marginTop: 4,
+    },
+
+    errorText: {
+        color: "red",
+        fontSize: 12,
+    },
+
+    errorTextFirebase: {
+        marginVertical: 10,
+    },
+
+    header: {
+        fontSize: 24,
         fontWeight: 'bold',
+        color: "white",
+        marginBottom: 8,
     },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
+
+    inputField: {
+        borderWidth: 1,
+        marginBottom: 6,
+        height: 36,
+        borderRadius: 10,
+        paddingLeft: 10,
+        fontSize: 15,
+    },
+
+    loginContainer: {
+        padding: 10,
+        width: '94%',
+        borderRadius: 8,
+    },
+
+    registerContainer: {
+        justifyContent: "flex-end",
+        alignItems: "center",
+        paddingBottom: '10%',
+    },
+
+    screen: {
+        height: '100%',
+    },
+
+    subheader: {
+        fontSize: 12,
+    },
+
+    subheaderContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 2,
+        marginBottom: 2,
     },
 });
+
+export default LoginScreen;

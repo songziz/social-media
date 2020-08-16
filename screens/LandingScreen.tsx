@@ -11,7 +11,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 
 const Stack = createStackNavigator();
 
-function AppStack() {
+function LandingStack() {
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="Landing" component={Landing} />
@@ -27,9 +27,6 @@ function Landing() {
     return (
         <Screen>
             <View>
-                <Text>
-                    Log in using your email address and password.
-        </Text>
                 <View>
                     <Button
                         onPress={() => nav.navigate("Login")} title="Login">
@@ -44,6 +41,6 @@ function Landing() {
 
 export default function LandingScreen() {
     return (
-        <AppStack />
+        <LandingStack />
     );
 }
