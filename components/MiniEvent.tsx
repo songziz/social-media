@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Button } from 'react-native';
 
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
@@ -10,19 +10,20 @@ import { useNavigation } from "@react-navigation/native";
 /**
  * A MiniEvent.
  * @param {string, boolean} param0 event id and a boolean for whether to display
- * a MiniProfile at the top of the MiniEvent.
+ * a MiniProfile at the top of the MiniEvent. Also if currentUser, display option to
+ * mark the event as completed.
  */
-export default function MiniEvent({ uid, displayUser = true }: { uid: string, displayUser: boolean }) {
+export default function MiniEvent({ uid, displayUser, currentUser, navLink }: { uid: string, displayUser: boolean, currentUser: boolean, navLink: string }) {
   const nav = useNavigation();
 
   const sampleEvent = {
     title: 'Fun event!',
     openings: 5,
-    slots: ['🔥', '🔥', '🔥', '', '',]
+    slots: ['🔥', '🔥', '🔥', '', '']
   };
 
   const onPress = () => {
-    nav.navigate("EventScreen");
+    nav.navigate(navLink);
   }
 
   const OpeningsSlots = sampleEvent.slots.map((slot, index) => {
@@ -33,10 +34,14 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
     );
   });
 
+  const markComplete = () => {
+    console.log('Marked complete.');
+  };
+
   if (displayUser) {
     return (
       <TouchableOpacity style={styles.container} onPress={onPress}>
-        <MiniProfile uid='sample' touchable={false} />
+        <MiniProfile uid='sample' touchable={false} navLink={''} />
         <View style={styles.separator} />
         <View style={styles.titleContainer}>
           <MonoText style={styles.title}>{sampleEvent.title}</MonoText>
@@ -48,6 +53,15 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
             {OpeningsSlots}
           </View>
         </View>
+        {currentUser && <View style={styles.separator} />}
+        {currentUser && 
+          <TouchableOpacity 
+            onPress={markComplete}
+            style={styles.completeContainer}
+          >
+            <Text style={styles.completeText}>Mark as Complete</Text>
+          </TouchableOpacity>
+        }
       </TouchableOpacity>
     );
   } else {
@@ -63,24 +77,47 @@ export default function MiniEvent({ uid, displayUser = true }: { uid: string, di
             {OpeningsSlots}
           </View>
         </View>
+        {currentUser && <View style={styles.separator} />}
+        {currentUser && 
+          <TouchableOpacity 
+            onPress={markComplete}
+            style={styles.completeContainer}
+          >
+            <Text style={styles.completeText}>mark as complete</Text>
+          </TouchableOpacity>
+        }
       </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  completeContainer: {
+    alignSelf: 'center',
+    backgroundColor: 'orange',
+    marginBottom: 8,
+    marginTop: 10,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 5,
+  },
+  completeText: {
+    color: 'black',
+    fontSize: 16,
+  },
   container: {
     width: '95%',
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: 'green',
     display: 'flex',
-    backgroundColor: 'white',
+    backgroundColor: '#d9f3ff',
     borderRadius: 3,
-    margin: 2,
+    margin: 4,
     padding: 2,
+    alignItems: 'center',
   },
   openingsContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#d9f3ff',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -108,7 +145,7 @@ const styles = StyleSheet.create({
   openingsSlotContainer: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#d9f3ff',
     flexWrap: 'wrap',
   },
   separator: {
@@ -116,6 +153,7 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     backgroundColor: 'green',
+    marginTop: 2,
   },
   title: {
     fontSize: 24,
@@ -123,7 +161,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   titleContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#d9f3ff',
     // borderWidth: 1,
     // borderColor: 'red',
   },

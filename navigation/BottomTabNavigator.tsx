@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import * as React from 'react';
 
 import Colors from '../constants/Colors';
@@ -13,6 +13,7 @@ import { BottomTabParamList, FeedTabParamList, FriendsTabParamList, ProfileTabPa
 import LandingScreen from '../screens/LandingScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const sample_uid = 'sampleuid';
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -25,21 +26,21 @@ export default function BottomTabNavigator() {
         name="FeedTab"
         component={FeedTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="FriendsTab"
         component={FriendsTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="ProfileTab"
         component={ProfileTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
         }}
       />
 
@@ -47,7 +48,7 @@ export default function BottomTabNavigator() {
         name="LandingTab"
         component={LandingTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-color-wand" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -69,9 +70,10 @@ function FeedTabNavigator() {
     <FeedTabStack.Navigator>
       <FeedTabStack.Screen
         name="FeedTabScreen"
-        component={FeedScreen}
         options={{ headerTitle: 'Feed' }}
-      />
+      >
+        {() => FeedScreen({uid: sample_uid})}
+      </FeedTabStack.Screen>
     </FeedTabStack.Navigator>
   );
 }
@@ -83,9 +85,10 @@ function FriendsTabNavigator() {
     <FriendsTabStack.Navigator>
       <FriendsTabStack.Screen
         name="FriendsTabScreen"
-        component={FriendsScreen}
         options={{ headerTitle: 'Friends' }}
-      />
+      >
+        {() => FriendsScreen({uid: sample_uid})}
+      </FriendsTabStack.Screen>
     </FriendsTabStack.Navigator>
   );
 }

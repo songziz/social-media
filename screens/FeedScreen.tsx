@@ -6,37 +6,45 @@ import MiniEvent from '../components/MiniEvent';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import EventScreen from "../screens/EventScreen";
+import FullEvent from "../components/FullEvent"
 
 const Stack = createStackNavigator();
 
-function FeedStack() {
+function FeedStack({ uid }: { uid: string }) {
+    //TODO: replace with actual array of events based off of uid.
+    const eventsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
     return (
-        <Stack.Navigator headerMode="none">
-            <Stack.Screen name="FeedScreen" component={Feed} />
-            <Stack.Screen name="EventScreen" component={EventScreen} />
+        <Stack.Navigator>
+            <Stack.Screen name="FeedScreen">
+                {() => Feed({ eventsArray: eventsArray })}
+            </Stack.Screen>
+            {eventsArray.map((uid) => (
+                <Stack.Screen
+                    key={'event' + uid}
+                    name={'event' + uid}
+                >
+                    {() => FullEvent({ uid: uid, currentUser: false })}
+                </Stack.Screen>
+            ))}
         </Stack.Navigator>
     )
 }
 
-function Feed() {
+function Feed({ eventsArray }: { eventsArray: string[] }) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
-                <MiniEvent uid='sample' displayUser={true} />
+                {eventsArray.map((uid) => (
+                    <MiniEvent uid={uid} key={'event' + uid} displayUser={true} currentUser={false} navLink={'event' + uid}/>
+                ))}
             </ScrollView>
         </View>
     );
 }
 
-export default function FeedScreen() {
+export default function FeedScreen({ uid }: { uid: string }) {
     return (
-        <FeedStack />
+        <FeedStack uid={uid} />
     )
 }
 

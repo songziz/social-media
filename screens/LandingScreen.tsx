@@ -5,13 +5,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation, NavigationContainer } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 
 const Stack = createStackNavigator();
 
-function AppStack() {
+function LandingStack() {
     return (
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="Landing" component={Landing} />
@@ -26,16 +26,16 @@ function Landing() {
 
     return (
         <Screen>
-            <View>
-                <Text>
-                    Log in using your email address and password.
-        </Text>
-                <View>
-                    <Button
-                        onPress={() => nav.navigate("Login")} title="Login">
-                    </Button>
-                    <Button onPress={() => nav.navigate("Register")} title="Register">
-                    </Button>
+            <View style={styles.container}>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={() => nav.navigate("Login")}>
+                        <Text style={styles.buttonText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={() => nav.navigate("Register")}>
+                        <Text style={styles.buttonText}>Register</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Screen>
@@ -44,6 +44,29 @@ function Landing() {
 
 export default function LandingScreen() {
     return (
-        <AppStack />
+        <LandingStack />
     );
 }
+
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "lightblue",
+        alignItems: "center",
+        padding: 15,
+        width: "100%",
+    },
+    buttonContainer: {
+        width: "100%",
+        padding: 15,
+    },
+    buttonText: {
+        color: "black",
+        fontSize: 20,
+    },
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: 'white',
+    }
+})
