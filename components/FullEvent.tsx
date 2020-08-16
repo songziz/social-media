@@ -40,7 +40,7 @@ export default function EventScreen() {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "white",
+        backgroundColor: "lightblue",
         height: "15%",
         width: "100%",
         padding: 10,
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: "black",
+        fontSize: 20,
     },
     container: {
         flex: 1,
