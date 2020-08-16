@@ -3,22 +3,29 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+import { useNavigation } from '@react-navigation/native';
 
 /**
  * A MiniProfile.
  * @param {string, boolean} param0 The Uid of the profile and a boolean for whether the
  * MiniProfile should be clickable.
  */
-export default function MiniProfile({uid, touchable=true}: {uid: string, touchable: boolean}) {
+export default function MiniProfile({ uid, touchable = true }: { uid: string, touchable: boolean }) {
+
+  const nav = useNavigation();
 
   const sampleUser = {
     username: 'user-name',
     emoji: '🔥',
   };
 
+  const onPress = () => {
+    nav.navigate("FriendInfoScreen");
+  }
+
   if (touchable) {
-    return ( 
-      <TouchableOpacity style={styles.container}>
+    return (
+      <TouchableOpacity style={[styles.container, {borderColor: 'black'}]} onPress={onPress}>
         <View style={styles.emojiContainer}>
           <Text style={styles.emoji}>{sampleUser.emoji}</Text>
         </View>
@@ -44,7 +51,7 @@ export default function MiniProfile({uid, touchable=true}: {uid: string, touchab
 const styles = StyleSheet.create({
   container: {
     width: '95%',
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: 'white',
     display: 'flex',
     flexDirection: 'row',

@@ -4,28 +4,60 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import MiniProfile from '../components/MiniProfile';
+import { createStackNavigator } from '@react-navigation/stack';
+import FriendInfoScreen from './FriendInfoScreen';
+import { ScrollView } from 'react-native-gesture-handler';
+
+const Stack = createStackNavigator();
+
+function FriendsStack() {
+    return (
+        <Stack.Navigator headerMode="none">
+            <Stack.Screen name="FriendsScreen" component={Friends} />
+            <Stack.Screen name="FriendInfoScreen" component={FriendInfoScreen} />
+        </Stack.Navigator>
+    )
+}
+
+function Friends() {
+    return (
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.scroll}>
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+                <MiniProfile uid='sample' touchable={true} />
+            </ScrollView>
+        </View>
+    );
+}
 
 export default function FriendsScreen() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Friends</Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <EditScreenInfo path="/screens/FriendsScreen.tsx" />
-            <MiniProfile uid='sample' touchable={true} />
-            <MiniProfile uid='sample' touchable={true} />
-        </View>
-    );
+        <FriendsStack />
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
+    },
+    scroll: {
+        width: '100%',
+        alignItems: 'center',
     },
     separator: {
         marginVertical: 30,
