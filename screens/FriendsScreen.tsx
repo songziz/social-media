@@ -10,6 +10,7 @@ import { MonoText } from '../components/StyledText';
 import { useState } from 'react';
 import Navigation from '../navigation';
 import { useNavigation } from '@react-navigation/native';
+import { acceptFriendReq } from '../util/api-functions';
 
 const Stack = createStackNavigator();
 
@@ -18,10 +19,40 @@ function FriendsStack({uid} : {uid: string}) {
     //TODO: replace with actual array of friends based off of uid.
     const friendsArray = ['uid1', 'uid2', 'uid3', 'uid4', 'uid5'];
     const [inputtedUsername, setInputtedUsername] = useState<string>('');
+
     return (
         <Stack.Navigator headerMode="none" initialRouteName="FriendsScreen">
             <Stack.Screen name="FriendsScreen">
                 {() => Friends({friendsArray: friendsArray})} 
+            </Stack.Screen>
+            <Stack.Screen name="FriendRequestScreen">
+                {() => {
+                    const confirmFriend = ({uid}: {uid: string}) => {
+                                                
+                    }
+                    const rejectFriend = ({uid}: {uid: string}) => {
+                                                
+                    }
+                    return(
+
+                        <ScrollView contentContainerStyle={{display: 'flex', alignItems: 'center'}}>
+                            {friendsArray.map((uid) => (
+                                <>
+                                    <View style={[styles.addFriendContainer, {width: '95%'}]}>
+                                        <TouchableOpacity style={styles.addFriendTouchable} onPress={() => confirmFriend({uid})}>
+                                            <MonoText style={styles.addFriendText}>confirm</MonoText>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.addFriendTouchable} onPress={() => rejectFriend({uid})}>
+                                            <MonoText style={styles.addFriendText}>reject</MonoText>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <MiniProfile uid={uid} key={'friends' + uid} touchable={false} navLink={'friends' + uid}/>
+                                    <View style={styles.separator}/>
+                                </>
+                            ))}
+                        </ScrollView>
+                    );
+                }}
             </Stack.Screen>
             <Stack.Screen name="AddFriendScreen">
                 {() => {
@@ -80,6 +111,9 @@ const Friends = ({friendsArray}: {friendsArray: string[]}) => {
                 <TouchableOpacity style={styles.addFriendTouchable} onPress={() => nav.navigate('AddFriendScreen')}>
                     <MonoText style={styles.addFriendText}>+ add a friend</MonoText>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.addFriendTouchable} onPress={() => nav.navigate('FriendRequestScreen')}>
+                    <MonoText style={styles.addFriendText}>incoming requests</MonoText>
+                </TouchableOpacity>
             </View>
             <ScrollView contentContainerStyle={styles.scroll}>
                 {friendsArray.map((uid) => (
@@ -101,9 +135,10 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        height: 40,
-        backgroundColor: 'white',
+        justifyContent: 'space-evenly',
+        height: 50,
+        backgroundColor: 'pink',
+        flexDirection: 'row',
     },
     addFriendModalContainer: {
         height: '40%',
@@ -117,6 +152,7 @@ const styles = StyleSheet.create({
     },
     addFriendText: {
         fontSize: 16,
+        color: 'black',
     },
     addFriendTouchable: {
         backgroundColor: 'lightblue',
@@ -159,5 +195,6 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         height: 1,
         width: '80%',
+        backgroundColor: "white",
     },
 });
