@@ -181,15 +181,22 @@ const fetchOptions = (method: string, idToken :string) => (
 );
 
 
-export const getImg = (url : string) => {
+export const getImg = async (url : string) => {
   var gsReference = storage.refFromURL(url);
-  gsReference.getDownloadURL().then(function(url) {
-    // Insert url into an <img> tag to "download"
-    return url;
-  }).catch(function(error) {
-
-    // A full list of error codes is available at
-    // https://firebase.google.com/docs/storage/web/handle-errors
+  try {
+    return await gsReference.getDownloadURL();
+  } catch (error) {
     console.log(error);
-  });
+  }
+
+
+  // .then(function(url) {
+  //   // Insert url into an <img> tag to "download"
+  //   return url;
+  // }).catch(function(error) {
+
+  //   // A full list of error codes is available at
+  //   // https://firebase.google.com/docs/storage/web/handle-errors
+  //   console.log(error);
+  // });
 }
