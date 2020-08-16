@@ -15,6 +15,7 @@ import { useForm, Controller } from "react-hook-form";
 
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { auth, firebase } from "../firebase";
 
 
 type FormData = {

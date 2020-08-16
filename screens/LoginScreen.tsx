@@ -7,6 +7,8 @@ import { TextInput } from 'react-native-gesture-handler';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigation } from "@react-navigation/native";
 
+import { auth } from "../firebase"
+
 interface FormData {
     email: string;
     password: string;
