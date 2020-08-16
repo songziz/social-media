@@ -12,12 +12,9 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
-import firebase from 'firebase';
-import '@firebase/auth';
 
 import { Feather } from "@expo/vector-icons";
 
-const auth = firebase.auth();
 
 type FormData = {
     firstName: string;
@@ -36,19 +33,19 @@ function RegisterScreen() {
     >();
 
     const onSubmit = handleSubmit(async ({ email, password }) => {
-        const shouldGo = await auth.createUserWithEmailAndPassword(email, password)
-            .then(async (newUser: firebase.auth.UserCredential) => {
-                const uid = newUser.user!.uid;
-                const user = await newCustomer({ email, uid });
-                setUser(user);
-                navigation.navigate('Feed');
-                reset({ firstName: '', lastName: '', email: '', password: '' });
-            }).catch((error: { message: any; }) => {
-                setError('email', {
-                    type: 'manual',
-                    message: error.message,
-                });
-            });
+        // const shouldGo = await auth.createUserWithEmailAndPassword(email, password)
+        //     .then(async (newUser: firebase.auth.UserCredential) => {
+        //         const uid = newUser.user!.uid;
+        //         const user = await newCustomer({ email, uid });
+        //         setUser(user);
+        //         navigation.navigate('Feed');
+        //         reset({ firstName: '', lastName: '', email: '', password: '' });
+        //     }).catch((error: { message: any; }) => {
+        //         setError('email', {
+        //             type: 'manual',
+        //             message: error.message,
+        //         });
+        //     });
     });
 
     const eyeOff = <Feather name="eye-off" size={24} />;

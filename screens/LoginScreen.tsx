@@ -6,10 +6,6 @@ import { TextInput } from 'react-native-gesture-handler';
 
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigation } from "@react-navigation/native";
-import firebase from 'firebase';
-import '@firebase/auth';
-
-const auth = firebase.auth();
 
 interface FormData {
     email: string;
@@ -24,17 +20,17 @@ function LoginScreen() {
     const navigation = useNavigation();
 
     const onSubmit = handleSubmit(async ({ email, password }) => {
-        await auth.signInWithEmailAndPassword(email, password)
-            .then(() => {
-                reset({ email: '', password: '' });
-                navigation.navigate("Feed");
-            })
-            .catch((error: { message: any; }) => {
-                setError('email', {
-                    type: 'firebase',
-                    message: error.message,
-                });
-            });
+        // await auth.signInWithEmailAndPassword(email, password)
+        //     .then(() => {
+        //         reset({ email: '', password: '' });
+        //         navigation.navigate("Feed");
+        //     })
+        //     .catch((error: { message: any; }) => {
+        //         setError('email', {
+        //             type: 'firebase',
+        //             message: error.message,
+        //         });
+        //     });
     });
 
     return (
